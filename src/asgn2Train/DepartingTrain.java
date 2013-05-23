@@ -7,15 +7,15 @@ public class DepartingTrain {
 	}
 
 	// Returns the first carriage on the train (which must be a locomotive)
-	public RollingStock::firstCarriage() {
+	public RollingStock firstCarriage() {
 		// Empty
-		RollingStock test = new RollingStock;
-		return test;
+		RollingStock firstCar = new RollingStock;
+		return firstCar;
 	}
 
 	/* Returns the next carriage in the train after the one returned by the
 		immediately preceding call to either this method or method firstCarriage */
-	public RollingStock::nextCarriage() {
+	public RollingStock nextCarriage() {
 		// dfdf
 		RollingStock test = new RollingStock;
 		return test;

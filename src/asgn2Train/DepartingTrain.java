@@ -1,5 +1,9 @@
 package asgn2Train;
 
+/*
+ * @author hello
+ */
+
 public class DepartingTrain {
 
 	DepartingTrain() {

@@ -47,6 +47,26 @@ public class DepartingTrain {
 		return test;
 	}
 	
+	/* Adds the given number of people to passenger carriages on the train.
+		We do not specify where the passengers must sit, so they can be
+		allocated to any vacant seat in any passenger car */
+	public int board(int newPassengers) {
+		// Add new passengers to total
+		int currentPassengers = 0;
+		maxPassengers = 100;
+
+
+		// Calculate overflow, the
+		overflow = newPassengers - (maxPassengers - currentPassengers);
+		
+		// Add passengers to train, except those that cannot fit
+		currentPassengers += newPassengers - overflow
+
+		// Returns the number of people who were unable to board the train
+		// because they couldn't get a seat
+		return currentPassengers;
+	}
+	
 	/* Returns whether or not the train is capable of moving. A train can move
 		if its locomotive's pulling power equals or exceeds the train's total
 		weight (including the locomotive itself) */

@@ -74,6 +74,8 @@ public class DepartingTrain {
 		// Test
 		returns true;
 	}
+	
+	// Test
 
 	/**
 	 * @param args

@@ -20,6 +20,32 @@ public class DepartingTrain {
 		RollingStock test = new RollingStock;
 		return test;
 	}
+	
+	/* Returns the total number of passengers currently on the train, counting all
+		passenger cars */
+	public int numberOnBoard() {
+		// test
+		int test = 0;
+		
+		// Add passenger numbers from all cards on train
+		// test += train1.value + train2.value;
+		
+		// Return number of passengers
+		return test;
+	}
+	
+	/* Returns the total number of seats on the train (whether occupied or not),
+		counting all passenger cars */
+	public int numberOfSeats() {
+		// test
+		int test = 0;
+		
+		// Add seat totals from all cars on train
+		// test += train1.seats.value + train2.seats.value;
+		
+		// Return total number of seats
+		return test;
+	}
 
 	/**
 	 * @param args

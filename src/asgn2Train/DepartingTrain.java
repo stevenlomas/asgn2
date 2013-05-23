@@ -46,6 +46,14 @@ public class DepartingTrain {
 		// Return total number of seats
 		return test;
 	}
+	
+	/* Returns whether or not the train is capable of moving. A train can move
+		if its locomotive's pulling power equals or exceeds the train's total
+		weight (including the locomotive itself) */
+	public boolean canMove() {
+		// Test
+		returns true;
+	}
 
 	/**
 	 * @param args

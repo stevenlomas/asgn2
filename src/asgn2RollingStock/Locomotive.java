@@ -3,31 +3,35 @@ package asgn2RollingStock;
 import asgn2Exceptions.TrainException;
 
 /**
- * @author Grant
- *
+ * @author 
  */
 public class Locomotive extends RollingStock {
-
-
+	private int locoPower;
+	private String locoEngine;
+	
 	public Locomotive(int grossWeight, String classification)
      throws TrainException {
-		super(0);
-		// TODO Auto-generated constructor stub
+		super(grossWeight);
+		
+		if (this.getGrossWeight() < 90) {
+			throw new TrainException("Locomotive may not have a gross " +
+					"weight that is less than 90 tonnes.");
+		}
+		
 	}
 	
 	public int power() {
-		return 0;
+		int pullingPower = (locoPower * 100) - this.getGrossWeight();
+		return pullingPower;
 	}
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		return locoPower + locoEngine;
 	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
 	}
 
 

@@ -1,5 +1,10 @@
 package asgn2Tests;
 
+/**
+ * 
+ * @author Grant O'Meara
+ *
+ */
 public class TrainTests {
 
 	public TrainTests() {

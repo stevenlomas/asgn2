@@ -1,9 +1,22 @@
 package asgn2Exceptions;
 
-public class TrainException {
+/**
+ * 
+ * @author 
+ *
+ */
+public class TrainException extends Exception {
+	/*
+	 * Added this because compiler complained without one.
+	 * Don't think it serves any useful purpose though.
+	 */
+	private static final long serialVersionUID = 1L;
 
-	public TrainException() {
-		// TODO Auto-generated constructor stub
+	/*
+	 * constructor for train exception message
+	 * @param an informative message describing the cause of the problem
+	 */
+	public TrainException(String message) {
 	}
 
 	/**

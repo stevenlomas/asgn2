@@ -8,10 +8,15 @@ import asgn2Exceptions.TrainException;
  *
  */
 public class PassengerCar extends RollingStock {
+	
+	private int currentPassengers;
+	private int seats;
 
 	public PassengerCar(int grossWeight, int numberOfSeats)
 			throws TrainException {
 		super(grossWeight);
+		seats = numberOfSeats; // Specified seating capacity
+		currentPassengers = 0; // No passengers on new carriage
 	}
 	
 	public int board(int newPassengers)
@@ -19,16 +24,24 @@ public class PassengerCar extends RollingStock {
 		return 0;		
 	}
 	
+	/* Removes the given number of passengers from this carriage.
+	 * Attempting to remove more passengers than are on board is not allowed. */
 	public void alight(int departingPassengers)
             throws TrainException {
+		/*if (departingPassengers > currentPassengers) {
+		throw new TrainException("May not remove more passengers" +
+			" than are currently boarded.");
+		} else {
+		currentPassengers -= departingPassengers
+		}*/
 	}
 	
 	public int numberOnBoard() {
-		return 0;
+		return currentPassengers;
 	}
 	
 	public int numberOfSeats() {
-		return 0;
+		return seats;
 	}
 
 	@Override
@@ -44,5 +57,4 @@ public class PassengerCar extends RollingStock {
 		// TODO Auto-generated method stub
 
 	}
-
 }

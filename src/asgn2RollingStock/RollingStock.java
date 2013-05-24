@@ -3,11 +3,15 @@ package asgn2RollingStock;
 import asgn2Exceptions.TrainException;
 
 /**
- * @author 
+ * 
+ * @author Grant O'Meara
+ * @author Steven Lomas
+ * 
  */
 public abstract class RollingStock extends Object {
 	
 	private int grossWeightPrivate;
+	
 	/*
 	 * Constructs a railway carriage with a specific gross weight 
 	 * (i.e., the carriage's weight when fully laden). We assume 
@@ -25,8 +29,8 @@ public abstract class RollingStock extends Object {
 	 */
 	public RollingStock(int grossWeight)
             throws TrainException {
-		//Commented out this conditional as its probably better off within
-		//the carriage classes rather than this one. Will keep for now.
+		// Commented out this conditional as its probably better off within
+		// the carriage classes rather than this one. Will keep for now.
 		/*if (grossWeight < 40) {
 			throw new TrainException("Passenger carriage may not have a gross " +
 					"weight that is less than 40 tonnes.");
@@ -58,9 +62,9 @@ public abstract class RollingStock extends Object {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	/* public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-	}
+	} */
 
 }

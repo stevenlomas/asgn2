@@ -3,14 +3,12 @@ package asgn2RollingStock;
 import asgn2Exceptions.TrainException;
 
 /**
- * 
  * @author Grant O'Meara
  * @author Steven Lomas
- * 
  */
 public abstract class RollingStock extends Object {
 	
-	private int grossWeightPrivate;
+	private int grossWeight;
 	
 	/*
 	 * Constructs a railway carriage with a specific gross weight 
@@ -29,20 +27,21 @@ public abstract class RollingStock extends Object {
 	 */
 	public RollingStock(int grossWeight)
             throws TrainException {
-		
-		if (grossWeight < 0) {
-			throw new TrainException("The gross weight for the rolling stock " +
-					"must not be less than 0");
+		// Commented out this conditional as its probably better off within
+		// the carriage classes rather than this one. Will keep for now.
+		if (grossWeight < 40) {
+			throw new TrainException("Passenger carriage may not have a gross " +
+					"weight that is less than 40 tonnes.");
 		}
 		
-		this.grossWeightPrivate = grossWeight;
+		this.grossWeight = grossWeight;
 	}
 	
 	/*
 	 * returns the carriage's gross weight in tonnes
 	 */
 	public int getGrossWeight() {	
-		return this.grossWeightPrivate;
+		return this.grossWeight;
 	}
 	
 	/*

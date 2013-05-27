@@ -2,6 +2,7 @@ package asgn2Exceptions;
 
 /**
  * @author Grant O'Meara
+ * @author Steven Lomas
  */
 public class TrainException extends Exception {
 	

@@ -12,9 +12,10 @@ public class DepartingTrain extends Object {
 	
 	private Vector<RollingStock> train;
 	private int iterator;
-	// OLD - private RollingStock Carriage;
 
-	// Constructs a (potential) train object containing no carriages (yet)
+	/**
+	 * Constructs a (potential) train object containing no carriages (yet)
+	 */
 	DepartingTrain() {
 		iterator = 0;
 		

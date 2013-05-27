@@ -98,6 +98,14 @@ public class PassengerCar extends RollingStock {
 		return seats;
 	}
 
+	/**
+	 * Returns a human-readable description of the passenger car.
+	 * This has the form "Passenger(x/y)" where x is the number of
+	 * passengers currently on board and y is the number of seats
+	 * in the carriage
+	 * 
+	 * @return a human-readable description of the passenger car
+	 */
 	@Override
 	public String toString() {
 		return "Passenger(" + this.numberOnBoard() + "/" +

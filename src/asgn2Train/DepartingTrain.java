@@ -175,11 +175,14 @@ public class DepartingTrain extends Object {
 	 */
 	public void addCarriage(RollingStock newCarriage)
 			throws TrainException {
+		// Iff Carriage is FreightCar
+		train.addElement(newCarriage); // Push newCarriage to back of train
+		
+		
+		// Throw error if trying to shunt
 		if (numberOnBoard() > 0) {
 			throw new TrainException("Cannot perform action with " +
 					"passengers on board - addCarriage");
-		} else {
-			train.addElement(newCarriage); // Push newCarriage to back of train
 		}
 	}
 	
@@ -222,9 +225,19 @@ public class DepartingTrain extends Object {
 	 * @returns a human-readable description of the entire train
 	 */
 	public String toString() {
-		// Iterate through train vector, calling ToString() for each.
-		// toString override
-		return "ERROR";
+		String output = "";
+		
+		for (int i = 0; i < train.size(); i++) { // Loop through train
+			output += train.elementAt(i).toString();
+			if (i + 1 < train.size()) { // Add break
+				output += "-";
+			}
+		}
+
+		if (train.isEmpty()) {
+			output = "No Carriages";
+		}
+		return output;
 	}
 
 	/**

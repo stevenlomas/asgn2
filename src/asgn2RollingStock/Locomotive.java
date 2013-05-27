@@ -8,7 +8,7 @@ import asgn2Exceptions.TrainException;
  */
 public class Locomotive extends RollingStock {
 	
-	private Integer locoPower, locoWeight;
+	private Integer locoPower;
 	private String locoClass, locoEngine;
 	//private char locoEngineType;
 	private char[] locoClassChar; //char array to split up the classification string
@@ -26,7 +26,6 @@ public class Locomotive extends RollingStock {
      throws TrainException {
 		super(grossWeight);
 
-		locoWeight = grossWeight; 
 		locoClass = classification;
 		locoClassChar = locoClass.toCharArray();
 		char engineType = locoClassChar[1];
@@ -35,7 +34,7 @@ public class Locomotive extends RollingStock {
 		/* Exception tests below */
 		//90 tonnes was chosen as it was mentioned to be the average min 
 		//weight of a locomotive in the assignment spec
-		if (this.locoWeight < 90) {
+		if (grossWeight < 90) {
 			throw new TrainException("Locomotive may not have a gross " +
 					"weight that is less than 90 tonnes.");
 		}
@@ -57,14 +56,14 @@ public class Locomotive extends RollingStock {
 
 		//end exception tests
 
-		switch (engineType) {
+		/* switch (engineType) {
 	        case 'D': locoEngine = "Diesel";
 	        	break;
 	        case 'S': locoEngine = "Steam";
          		break;
 	        case 'E': locoEngine = "Electric";
 	        	break;           
-		}	
+		} */
 	}
 
 	/**

@@ -6,6 +6,7 @@ import asgn2Exceptions.TrainException;
  * @author Grant O'Meara
  */
 public class Locomotive extends RollingStock {
+	
 	private Integer locoPower, locoWeight;
 	private String locoClass, locoEngine;
 	//private char locoEngineType;

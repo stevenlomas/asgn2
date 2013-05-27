@@ -1,7 +1,8 @@
 package asgn2Train;
 
-import asgn2RollingStock.RollingStock;
+import asgn2RollingStock.*;
 import asgn2Exceptions.TrainException;
+import java.util.Vector;
 
 /**
  * 
@@ -11,26 +12,62 @@ import asgn2Exceptions.TrainException;
 
 public class DepartingTrain extends Object {
 	
-	RollingStock train;
+	private Vector<RollingStock> train;
+	// private RollingStock Carriage;
+	private int iterator;
 
 	DepartingTrain() {
 		// Constructs a (potential) train object containing no carriages (yet)
 		// empty RollingStock array?
+		// train.add(firstCarriage());
+		iterator = 0;
 	}
 
-	// Returns the first carriage on the train (which must be a locomotive)
+	/**
+	 * Returns the first carriage on the train (which must be a locomotive).
+	 * Special value null is returned if there are no carriages on the train at all.
+	 * 
+	 * @return the first carriage in the train, or null if there are no carriages
+	 * @throws TrainException
+	 */
 	public RollingStock firstCarriage() {
-		// Create new RollingStock object for testing
-		RollingStock firstCar = new RollingStock(10);
-		return firstCar;
+		// OLD
+		// this.firstCar = new Locomotive(100, "6D");
+		
+		if (train.isEmpty()) {
+			return null;
+		} else {
+			return train.firstElement();
+		}
 	}
 
-	/* Returns the next carriage in the train after the one returned by the
-		immediately preceding call to either this method or method firstCarriage */
+	/**
+	 * Returns the next carriage in the train after the one returned by the
+	 * immediately preceding call to either this method or method firstCarriage.
+	 * Special value null is returned if there is no such carriage. If there has
+	 * been no preceding call to either firstCarriage or nextCarriage, this
+	 * method behaves like firstCarriage, i.e., it returns the first carriage
+	 * in the train, if any.
+	 * NB: When combined with method firstCarriage, this method gives us a simple
+	 * ability to iteratively examine each of the train's carriages.
+	 * 
+	 * @return the train's next carriage after the one returned by the immediately
+	 * preceding call to either firstCarriage or nextCarriage, or null if there
+	 * is no such carriage
+	 * @throws TrainException
+	 */
 	public RollingStock nextCarriage() {
-		// Create new RollingStock object for testing
-		RollingStock test = new RollingStock(10);
-		return test;
+		// OLD - this.nextCar = new PassengerCar(50, 24);
+		
+		// Return null, no such Carriage exists
+		if (train.isEmpty()) {
+			return null;
+		} else if (iterator > train.size() - 1) { // Out of range?
+			return null;
+		} else {
+			iterator += 1;
+			return train.get(iterator);
+		}
 	}
 	
 	/* Returns the total number of passengers currently on the train, counting all
@@ -62,7 +99,8 @@ public class DepartingTrain extends Object {
 	/* Adds the given number of people to passenger carriages on the train.
 		We do not specify where the passengers must sit, so they can be
 		allocated to any vacant seat in any passenger car */
-	public int board(int newPassengers) {
+	public int board(int newPassengers)
+		throws TrainException {
 		int availableSeats = numberOnBoard();
 		
 		// Board passengers from front to back
@@ -120,6 +158,11 @@ public class DepartingTrain extends Object {
 	public void addCarriage(RollingStock newCarriage)
 			throws TrainException {
 		// Add newCarriage RollingStock object to end of train
+		if (numberOnBoard() > 0) {
+			// cannot shunt while Passengers on board
+		} else {
+			train.addElement(newCarriage); // Push newCarriage to back of train
+		}
 	}
 	
 	/**
@@ -133,7 +176,14 @@ public class DepartingTrain extends Object {
 	 */
 	public void removeCarriage()
             throws TrainException {
-		// Remove RollingStock object from end of train
+		if (numberOnBoard() > 0) {
+			throw new TrainException("Cannot perform action with " +
+				"passengers on board.");
+		} else if (train.isEmpty()){
+			throw new TrainException("No Carriages to remove.");
+		} else {
+			train.remove(train.lastElement());
+		}
 	}
 	
 	/**
@@ -154,8 +204,9 @@ public class DepartingTrain extends Object {
 	 * @returns a human-readable description of the entire train
 	 */
 	public String toString() {
+		// Iterate through train vector, calling ToString() for each.
 		// toString override
-		return "";
+		return "ERROR";
 	}
 	
 	

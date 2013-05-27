@@ -47,14 +47,15 @@ public class PassengerCar extends RollingStock {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return null;
+		return "Passenger(" + this.numberOnBoard() + "/" +
+				this.numberOfSeats() + ")";
 	}
 	
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	/* public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-	}
+	} */
 }

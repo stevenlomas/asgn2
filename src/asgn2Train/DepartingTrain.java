@@ -107,12 +107,12 @@ public class DepartingTrain extends Object {
 	 * @param newPassengers - the number of people wish to board the train
 	 * @return the number of people who were unable to board the train because
 	 * they couldn't get a seat
-	 * @throws TrainException - if the number of new passengers is negative
+	 * @throws TrainException if the number of new passengers is negative
 	 */
 	public int board(int newPassengers)
 		throws TrainException {
 		if (newPassengers < 0) {
-			throw new TrainException("Cannot board negative passengers.");
+			throw new TrainException("Cannot board negative passengers - DepartingTrain");
 		}
 		
 		/* Iterate through train. Push new passengers into first available passenger
@@ -177,7 +177,7 @@ public class DepartingTrain extends Object {
 			throws TrainException {
 		if (numberOnBoard() > 0) {
 			throw new TrainException("Cannot perform action with " +
-					"passengers on board.");
+					"passengers on board - addCarriage");
 		} else {
 			train.addElement(newCarriage); // Push newCarriage to back of train
 		}
@@ -196,7 +196,7 @@ public class DepartingTrain extends Object {
             throws TrainException {
 		if (numberOnBoard() > 0) {
 			throw new TrainException("Cannot perform action with " +
-				"passengers on board.");
+				"passengers on board - removeCarriage");
 		} else if (train.isEmpty()){
 			throw new TrainException("No Carriages to remove.");
 		} else {

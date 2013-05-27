@@ -13,6 +13,15 @@ public class Locomotive extends RollingStock {
 	//private char locoEngineType;
 	private char[] locoClassChar; //char array to split up the classification string
 
+	/**
+	 * Constructs a new locomotive object with a fixed gross weight
+	 * and classification code
+	 * 
+	 * @param grossWeight - the locomotive's (fully-laden) weight in tonnes
+	 * @param classification - the locomotive's two-character classification code
+	 * @throws TrainException if the locomotive's weight is not strictly positive
+	 * or if its classification code is invalid
+	 */
 	public Locomotive(Integer grossWeight, String classification)
      throws TrainException {
 		super(grossWeight);
@@ -35,13 +44,14 @@ public class Locomotive extends RollingStock {
 			throw new TrainException("Invalid classification. Locomotive must have letter " +
 					"(engine type) and integer (power class) within its classification.");
 		}
-		//if the locopower is less than 100 that means the power classification was less than 1
-		//and therefore invalid
-		if (locoPower < 100) {
+
+		if (locoPower < 100) { // Locopower less than 100 (classification 1)
 			throw new TrainException("Invalid power classification, must be greater than 1.");
 		}
-		//checks if the engine classification was one of the valid types
-		if (engineType != 'E' && engineType != 'D' && engineType != 'S') {
+		
+		if (engineType != 'E' &&
+			engineType != 'D' &&
+			engineType != 'S') { // Not Valid engine classification
 			throw new TrainException("Invalid engine classification, must be E, D or S.");
 		}
 
@@ -57,10 +67,21 @@ public class Locomotive extends RollingStock {
 		}	
 	}
 
+	/**
+	 * Returns how much total weight the locomotive can pull (including itself)
+	 * 
+	 * @return the locomotive's "pulling power" in tonnes
+	 */
 	public int power() {
 		return locoPower;
 	}
 
+	/**
+	 * Returns a human-readable description of the locomotive. This has the form
+	 * "Loco(x)" where x is the locomotive's two-character classification code
+	 * 
+	 * @return a human-readable description of the locomotive
+	 */
 	@Override
 	public String toString() {
 		return "Loco(" + this.locoClass + ")";

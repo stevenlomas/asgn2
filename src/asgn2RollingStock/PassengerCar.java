@@ -10,6 +10,18 @@ public class PassengerCar extends RollingStock {
 	private int currentPassengers;
 	private int seats;
 
+	/**
+	 * Constructs a passenger car with a known weight and a fixed number
+	 * of seats
+	 * (We allow a passenger car to have zero seats, although
+	 * it would not be very useful)
+	 * 
+	 * @param grossWeight - the carriage's gross weight in tonnes
+	 * (ignoring the weight of passengers, which we treat as negligible)
+	 * @param numberOfSeats - how many seats are available in the carriage
+	 * @throws TrainException if the gross weight is not positive or
+	 * if the number of seats is negative
+	 */
 	public PassengerCar(int grossWeight, int numberOfSeats)
 			throws TrainException {
 		super(grossWeight);
@@ -26,11 +38,24 @@ public class PassengerCar extends RollingStock {
 	 * the carriage
 	 * @return the number of people who were unable to board the carriage
 	 * because they couldn't get a seat
-	 * @throws TrainException - if the number of new passengers is negative
+	 * @throws TrainException if the number of new passengers is negative
 	 */
 	public int board(int newPassengers)
-			throws TrainException {	
-		return 0;		
+			throws TrainException {
+		if (newPassengers < 0) {
+			throw new TrainException("Cannot board negative passengers - PassengerCar");
+		}
+		
+		// Find free number of seats
+		int freeSeats = seats - currentPassengers;
+		
+		if (freeSeats > newPassengers) { // Can fit, return none
+			currentPassengers += newPassengers;
+			return 0;
+		} else { // Cannot all fit, greater than freeSeats
+			currentPassengers += freeSeats; // Fill free seats
+			return newPassengers - freeSeats; // Return passengers minus seated
+		}		
 	}
 	
 	/**
@@ -39,7 +64,7 @@ public class PassengerCar extends RollingStock {
 	 * 
 	 * @param departingPassengers - the number of passengers alighting
 	 * from the carriage
-	 * @throws TrainException - if the number of departing passengers is
+	 * @throws TrainException if the number of departing passengers is
 	 * negative or if the number of departing passengers exceeds the number
 	 * on board
 	 */

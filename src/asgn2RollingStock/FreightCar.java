@@ -27,7 +27,6 @@ public class FreightCar extends RollingStock {
 	 * @return - the goodsType (G", "R" or "D")
 	 */
 	public String goodsType() {
-		
 		return "returned string goes here";
 	}
 	

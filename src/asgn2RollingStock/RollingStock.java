@@ -29,13 +29,13 @@ public abstract class RollingStock extends Object {
 	 */
 	public RollingStock(int grossWeight)
             throws TrainException {
-		// Commented out this conditional as its probably better off within
-		// the carriage classes rather than this one. Will keep for now.
-		/*if (grossWeight < 40) {
-			throw new TrainException("Passenger carriage may not have a gross " +
-					"weight that is less than 40 tonnes.");
-		}*/
-		grossWeightPrivate = grossWeight;
+		
+		if (grossWeight < 0) {
+			throw new TrainException("The gross weight for the rolling stock " +
+					"must not be less than 0");
+		}
+		
+		this.grossWeightPrivate = grossWeight;
 	}
 	
 	/*

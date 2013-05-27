@@ -10,17 +10,17 @@ public class Locomotive extends RollingStock {
 	private String locoClass, locoEngine;
 	//private char locoEngineType;
 	private char[] locoClassChar; //char array to split up the classification string
-	
+
 	public Locomotive(Integer grossWeight, String classification)
      throws TrainException {
 		super(grossWeight);
-		
+
 		locoWeight = grossWeight; 
 		locoClass = classification;
 		locoClassChar = locoClass.toCharArray();
 		char engineType = locoClassChar[1];
 		locoPower = (Integer.parseInt(String.valueOf(locoClassChar[0])) * 100);
-		
+
 		/* Exception tests below */
 		//90 tonnes was chosen as it was mentioned to be the average min 
 		//weight of a locomotive in the assignment spec
@@ -42,9 +42,9 @@ public class Locomotive extends RollingStock {
 		if (engineType != 'E' && engineType != 'D' && engineType != 'S') {
 			throw new TrainException("Invalid engine classification, must be E, D or S.");
 		}
-		
+
 		//end exception tests
-		
+
 		switch (engineType) {
 	        case 'D': locoEngine = "Diesel";
 	        	break;
@@ -54,14 +54,15 @@ public class Locomotive extends RollingStock {
 	        	break;           
 		}	
 	}
-	
+
 	public int power() {
 		return locoPower;
 	}
 
 	@Override
 	public String toString() {
-		return "Locmotive weighs " + locoWeight + "tonnes. It has a(n) " +
-				locoEngine + " engine that has a power output of  " + locoPower;
+		return "Loco(" + this.locoClass + ")";
+		/* return "Locmotive weighs " + locoWeight + "tonnes. It has a(n) " +
+				locoEngine + " engine that has a power output of  " + locoPower; */
 	}
 }

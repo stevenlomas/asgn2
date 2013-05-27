@@ -58,12 +58,4 @@ public abstract class RollingStock extends Object {
 	@Override
 	public abstract String toString();
 
-	/**
-	 * @param args
-	 */
-	/* public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	} */
-
 }

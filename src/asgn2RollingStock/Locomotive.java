@@ -4,6 +4,7 @@ import asgn2Exceptions.TrainException;
 
 /**
  * @author Grant O'Meara
+ * @author Steven Lomas
  */
 public class Locomotive extends RollingStock {
 	
@@ -66,4 +67,5 @@ public class Locomotive extends RollingStock {
 		/* return "Locmotive weighs " + locoWeight + "tonnes. It has a(n) " +
 				locoEngine + " engine that has a power output of  " + locoPower; */
 	}
+	
 }

@@ -50,13 +50,5 @@ public class FreightCar extends RollingStock {
 		{
 		return "Freight(" + goodsType() + ")";
 	}
-
-	/**
-	 * @param args
-	 */
-	/* public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	} */
-
+	
 }

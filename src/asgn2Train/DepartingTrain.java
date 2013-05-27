@@ -5,9 +5,7 @@ import asgn2Exceptions.TrainException;
 import java.util.Vector;
 
 /**
- * 
  * @author Steven Lomas
- * 
  */
 
 public class DepartingTrain extends Object {
@@ -228,11 +226,10 @@ public class DepartingTrain extends Object {
 		// toString override
 		return "ERROR";
 	}
-	
-	
-	// Test
 
 	/**
+	 * Does DepartingTrain need a main method?
+	 * 
 	 * @param args
 	 */
 	/* public static void main(String[] args) {

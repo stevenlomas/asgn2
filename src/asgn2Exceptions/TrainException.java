@@ -1,9 +1,7 @@
 package asgn2Exceptions;
 
 /**
- * 
- * @author 
- *
+ * @author Grant O'Meara
  */
 public class TrainException extends Exception {
 	/*
@@ -18,13 +16,5 @@ public class TrainException extends Exception {
 	 */
 	public TrainException(String message) {
 	}
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
+	
 }

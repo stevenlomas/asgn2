@@ -1,0 +1,22 @@
+Statement by the Team
+---------------------
+
+Since this is a group project, we want a statement from the team so that we know who did 
+what. Write a short (well under 1 page) plain text document called statement.txt
+containing the following information.
+
+1 The names and student numbers of the team members. 
+2 A (short!) summary of the contribution made by each team member. (Your program 
+code should also contain appropriate comments indicating authorship.)
+3 A (short!) explanation of what GUI editing tools you used, if any, for Part 2 of the 
+assignment. (Recall from the instructions that a higher standard of user interface is 
+expected from teams who used a GUI editor compared to those who didn’t. Either 
+way, however, your solution must work within Eclipse.)
+4 A statement that the summary is agreed by both students. 
+
+(This is not the place to ask for special consideration or for lateness penalties to be 
+waived – do that via email, with supporting evidence such as a medical certificate as 
+usual.) 
+
+The file must be in plain text format, not Microsoft Word, Libre Office, PDF or other such 
+formats, so that it can be appended to the automatically-generated marking report.

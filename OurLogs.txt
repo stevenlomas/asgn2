@@ -1,0 +1,6 @@
+As part of the spec, you supposed to provide some evidence of your usage of source control 
+systems. This is something which should be very light, and you should use the source control tools to help you. I will give very simple instructions for git; those using other tools should look at the help files for the equivalent. The easiest thing to do is to use the git log command. As far as I am concerned, take the output from this command, and copy and paste it into a text file called OurLogs.txt. A guide to usage may be found here: 
+http://git-scm.com/book/en/Git-Basics-Viewing-the-Commit-History
+
+I don’t think that it is necessary for our purposes for you to use the more sophisticated 
+options. 

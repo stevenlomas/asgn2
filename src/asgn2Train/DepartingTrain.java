@@ -13,14 +13,15 @@ import java.util.Vector;
 public class DepartingTrain extends Object {
 	
 	private Vector<RollingStock> train;
-	// private RollingStock Carriage;
 	private int iterator;
+	// OLD - private RollingStock Carriage;
 
+	// Constructs a (potential) train object containing no carriages (yet)
 	DepartingTrain() {
-		// Constructs a (potential) train object containing no carriages (yet)
-		// empty RollingStock array?
-		// train.add(firstCarriage());
 		iterator = 0;
+		
+		// OLD - this.nextCar = new PassengerCar(50, 24);
+		// OLD - this.firstCar = new Locomotive(100, "6D");
 	}
 
 	/**
@@ -31,9 +32,6 @@ public class DepartingTrain extends Object {
 	 * @throws TrainException
 	 */
 	public RollingStock firstCarriage() {
-		// OLD
-		// this.firstCar = new Locomotive(100, "6D");
-		
 		if (train.isEmpty()) {
 			return null;
 		} else {
@@ -57,10 +55,7 @@ public class DepartingTrain extends Object {
 	 * @throws TrainException
 	 */
 	public RollingStock nextCarriage() {
-		// OLD - this.nextCar = new PassengerCar(50, 24);
-		
-		// Return null, no such Carriage exists
-		if (train.isEmpty()) {
+		if (train.isEmpty()) { // Return null - no Carriages
 			return null;
 		} else if (iterator > train.size() - 1) { // Out of range?
 			return null;
@@ -70,76 +65,101 @@ public class DepartingTrain extends Object {
 		}
 	}
 	
-	/* Returns the total number of passengers currently on the train, counting all
-		passenger cars */
+	/**
+	 * Returns the total number of passengers currently on the train,
+	 * counting all passenger cars
+	 * 
+	 * @return the number of passengers on the train
+	 */
 	public int numberOnBoard() {
-		int availableSeats = 0;
-
-		// Find number of FREE seats on ALL current passenger cars
-		// availableSeats = car1.numberOnBoard();
-		// availableSeats += car2.numberOnBoard();
+		int passengers = 0;
 		
-		// Return number of passengers
-		return availableSeats;
+		for (int i = 0; i < train.size(); i++) { // Loop through train
+			if (train.elementAt(i) instanceof PassengerCar) { // Passenger Carriage
+				passengers += ((PassengerCar)train.elementAt(i)).numberOnBoard();
+			}
+		}
+
+		return passengers;
 	}
 	
-	/* Returns the total number of seats on the train (whether occupied or not),
-		counting all passenger cars */
+	/**
+	 * Returns the total number of seats on the train (whether occupied or not),
+	 * counting all passenger cars
+	 * 
+	 * @return the number of seats on the train
+	 */
 	public int numberOfSeats() {
 		int seats = 0;
 		
-		// Add seat totals from all cars on train
-		// car1.numberOfSeats();
-		// car2.numberOfSeats();
+		for (int i = 0; i < train.size(); i++) { // Loop through train
+			if (train.elementAt(i) instanceof PassengerCar) { // Passenger Carriage
+				seats += ((PassengerCar)train.elementAt(i)).numberOfSeats();
+			}
+		}
 		
-		// Return total number of seats
 		return seats;
 	}
 	
-	/* Adds the given number of people to passenger carriages on the train.
-		We do not specify where the passengers must sit, so they can be
-		allocated to any vacant seat in any passenger car */
+	/**
+	 * Adds the given number of people to passenger carriages on the train.
+	 * We do not specify where the passengers must sit, so they can be
+	 * allocated to any vacant seat in any passenger car
+	 * 
+	 * @param newPassengers - the number of people wish to board the train
+	 * @return the number of people who were unable to board the train because
+	 * they couldn't get a seat
+	 * @throws TrainException - if the number of new passengers is negative
+	 */
 	public int board(int newPassengers)
 		throws TrainException {
-		int availableSeats = numberOnBoard();
-		
-		// Board passengers from front to back
-		// car1.board(newPassengers - (car1.numberOfSeats() - car1.numberOnBoard());
-		// car2.board(newPassengers - (car2.numberOfSeats() - car2.numberOnBoard());
-		
-		// Any leftover passengers are returned
-		if (newPassengers - availableSeats < 0) {
-			return 0;
-		} else {
-			return newPassengers - availableSeats;
+		if (newPassengers < 0) {
+			throw new TrainException("Cannot board negative passengers.");
 		}
 		
-		/* OUTDATED
-		// Add new passengers to total
-		int currentPassengers = 0;
-		int maxPassengers = 100;
-
-
-		// Calculate overflow, the
-		int overflow = newPassengers - (maxPassengers - currentPassengers);
+		/* Iterate through train. Push new passengers into first available passenger
+		 * carriage. Returned passengers is new total */
+		for (int i = 0; i < train.size(); i++) { // Loop through train
+			if (train.elementAt(i) instanceof PassengerCar) { // Passenger Carriage
+				newPassengers = ((PassengerCar)train.elementAt(i)).board(newPassengers);
+			}
+		}
 		
-		// Add passengers to train, except those that cannot fit
-		currentPassengers += newPassengers - overflow;
-
-		// Returns the number of people who were unable to board the train
-		// because they couldn't get a seat
-		return currentPassengers; */
+		return newPassengers; // Return passengers who didn't find a seat
 	}
 	
-	/* Returns whether or not the train is capable of moving. A train can move
-		if its locomotive's pulling power equals or exceeds the train's total
-		weight (including the locomotive itself) */
+	/**
+	 * Returns whether or not the train is capable of moving. A train can move if
+	 * its locomotive's pulling power equals or exceeds the train's total weight
+	 * (including the locomotive itself).
+	 * In the degenerate case of a "train" which doesn't have any rolling stock
+	 * at all yet, the method returns true.
+	 * 
+	 * @return true if the train can move (or contains no carriages), false otherwise
+	 */
 	public boolean canMove() {
-		// Find totalWeight of train
-		// for number of RollingStock objects getGrossWeight
+		int totalWeight = 0;
 		
-		// if totalWeight < locomotive.power() return true else return false;
-		return true;
+		if (train.isEmpty()) { // Return true - no Carriages
+			return true;
+		}
+		
+		// Find totalWeight of train
+		for (int i = 0; i < train.size(); i++) { // Loop through train
+			totalWeight += train.elementAt(i).getGrossWeight();
+		}
+		
+		// Locomotive power VS. total train weight
+		if (train.firstElement() instanceof Locomotive) {
+			if (((Locomotive)train.firstElement()).power() > totalWeight) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			// First object not Locomotive. Train incorrectly configured?
+			return true;
+		}
 	}
 	
 	/**
@@ -157,9 +177,9 @@ public class DepartingTrain extends Object {
 	 */
 	public void addCarriage(RollingStock newCarriage)
 			throws TrainException {
-		// Add newCarriage RollingStock object to end of train
 		if (numberOnBoard() > 0) {
-			// cannot shunt while Passengers on board
+			throw new TrainException("Cannot perform action with " +
+					"passengers on board.");
 		} else {
 			train.addElement(newCarriage); // Push newCarriage to back of train
 		}

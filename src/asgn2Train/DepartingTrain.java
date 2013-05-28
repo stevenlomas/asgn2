@@ -10,7 +10,7 @@ import java.util.Vector;
 
 public class DepartingTrain extends Object {
 	
-	private Vector<RollingStock> train;
+	private Vector<RollingStock> train = new Vector<RollingStock>();
 	private int iterator;
 
 	/**

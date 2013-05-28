@@ -17,11 +17,20 @@ public class TrainGUI extends JFrame implements ActionListener {
 	private static final long serialVersionUID = -7031008862559936404L;
 	private static final String TITLE = "Departing Train - INB370 asgn2";
 	
+	private DepartingTrain Train = new DepartingTrain();
+	
 	private JPanel centerPanel;
 	private JPanel northPanel;
 	private JPanel southPanel;
 	private JPanel eastPanel;
 	private JPanel westPanel;
+	
+	private JTextArea textDisplay;
+	
+	private JLabel currentLoad;
+	private JLabel currentPassengers;
+	private JLabel totalSeats;
+	private JLabel capacity;
 	
 	// Add Menu
 	private JMenuItem addLocomotiveChoice;
@@ -51,13 +60,18 @@ public class TrainGUI extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
 		
-		//Panel related code will go here
+		/* Panels */
 		centerPanel = createPanel(Color.WHITE);
 		northPanel = createPanel(Color.LIGHT_GRAY);
 		southPanel = createPanel(Color.LIGHT_GRAY);
 		eastPanel = createPanel(Color.LIGHT_GRAY);
 		westPanel = createPanel(Color.LIGHT_GRAY);
 		
+		/* Labels */
+		currentLoad = createLabel("");
+		currentPassengers = createLabel("");
+		totalSeats = createLabel("");
+		capacity = createLabel("");
 		
 		/* Add Menu */
 		JMenu addMenu = new JMenu("Add");
@@ -89,12 +103,28 @@ public class TrainGUI extends JFrame implements ActionListener {
 		removePassengersChoice.addActionListener(new MenuListener());
 		removeMenu.add(removePassengersChoice);
 		
+		/* Text Area */
+		textDisplay = new JTextArea();
+		textDisplay.setEditable(false);
+		textDisplay.setLineWrap(true);
+		textDisplay.setFont(new Font("Arial",Font.BOLD,24));
+		textDisplay.setBorder(BorderFactory.createEtchedBorder());
+		// textDisplay.setSize(100, 200);
 		
+		/* Setup Panels */
 		this.getContentPane().add(centerPanel,BorderLayout.CENTER);
 		this.getContentPane().add(northPanel,BorderLayout.NORTH);
 		this.getContentPane().add(southPanel,BorderLayout.SOUTH);
 		this.getContentPane().add(eastPanel,BorderLayout.EAST);
 		this.getContentPane().add(westPanel,BorderLayout.WEST);
+		
+		centerPanel.add(textDisplay);
+		
+		/* West Panel */
+		westPanel.add(currentLoad);
+		westPanel.add(currentPassengers);
+		westPanel.add(totalSeats);
+		westPanel.add(capacity);
 		
 		JMenuBar bar = new JMenuBar();
 		bar.add(addMenu);
@@ -105,14 +135,47 @@ public class TrainGUI extends JFrame implements ActionListener {
 	}
 	
 	private JPanel createPanel(Color c) {
-		//Create a JPanel object and store it in a local var
+		// Create a JPanel object and store it in a local var
 		JPanel newPanel = new JPanel();
 		
-		//set the background colour to that passed in c
+		// Set the background colour to that passed in c
 		newPanel.setBackground(c);
 		
-		//Return the JPanel object
+		// Return the JPanel object
 		return newPanel;
+	}
+	
+	private JLabel createLabel(String text) {
+		// Create a JLabel object and store it in a local var
+		JLabel newLabel = new JLabel();
+		
+		// Set the text
+		newLabel.setText(text);
+		
+		// Return the JLabel object
+		return newLabel;
+	}
+	
+	public void UpdateInformation() {
+		boolean moveable = Train.canMove();
+		int passengers = Train.numberOnBoard();
+		int seats = Train.numberOfSeats();
+		int freeSeats = seats - passengers;
+		
+		if (moveable) { // Train can move
+			currentLoad.setText("Underloaded");
+		} else { // Train cannot move
+			currentLoad.setText("Overloaded");
+		}
+		
+		if (freeSeats > 0) { // Seats available
+			capacity.setText("Train is not full");
+		} else {
+			capacity.setText("Train is full");
+		}
+		
+		currentPassengers.setText(String.valueOf(passengers));
+		totalSeats.setText(String.valueOf(seats));
 	}
 	
 	/* (non-Javadoc)
@@ -130,7 +193,7 @@ public class TrainGUI extends JFrame implements ActionListener {
 	public static void main(String[] args) {
 		// Set up components
 		TrainGUI GUI = new TrainGUI(TITLE); // GUI
-		DepartingTrain Train = new DepartingTrain(); // Departing Train
+		// DepartingTrain Train = new DepartingTrain(); // Departing Train
 		
 		// Show GUI
 		GUI.setResizable(false);
@@ -148,6 +211,7 @@ public class TrainGUI extends JFrame implements ActionListener {
 	           } else if (source == whiteButton || source == whiteChoice) {
 	               whitePanel.setBackground(Color.WHITE);
 	           } */
+	           UpdateInformation();
 	       }
 	}
 

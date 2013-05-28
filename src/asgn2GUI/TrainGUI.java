@@ -23,6 +23,16 @@ public class TrainGUI extends JFrame implements ActionListener {
 	private JPanel eastPanel;
 	private JPanel westPanel;
 	
+	// Add Menu
+	private JMenuItem addLocomotiveChoice;
+	private JMenuItem addPassengerCarChoice;
+	private JMenuItem addFreightCarChoice;
+	private JMenuItem addPassengersChoice;
+	
+	// Remove Menu
+	private JMenuItem removeLocomotiveChoice;
+	private JMenuItem removePassengersChoice;
+	
 	public static final int WIDTH = 640;
 	public static final int HEIGHT = 480;
 	
@@ -48,11 +58,48 @@ public class TrainGUI extends JFrame implements ActionListener {
 		eastPanel = createPanel(Color.LIGHT_GRAY);
 		westPanel = createPanel(Color.LIGHT_GRAY);
 		
+		
+		/* Add Menu */
+		JMenu addMenu = new JMenu("Add");
+		
+		addLocomotiveChoice = new JMenuItem("Locomotive");
+		addLocomotiveChoice.addActionListener(new MenuListener());
+		addMenu.add(addLocomotiveChoice);
+		
+		addPassengerCarChoice = new JMenuItem("Passenger Carriage");
+		addPassengerCarChoice.addActionListener(new MenuListener());
+		addMenu.add(addPassengerCarChoice);
+		
+		addFreightCarChoice = new JMenuItem("Freight Carriage");
+		addFreightCarChoice.addActionListener(new MenuListener());
+		addMenu.add(addFreightCarChoice);
+		
+		addPassengersChoice = new JMenuItem("Passengers");
+		addPassengersChoice.addActionListener(new MenuListener());
+		addMenu.add(addPassengersChoice);
+		
+		/* Remove Menu */
+		JMenu removeMenu = new JMenu("Remove");
+		
+		removeLocomotiveChoice = new JMenuItem("Carriage");
+		removeLocomotiveChoice.addActionListener(new MenuListener());
+		removeMenu.add(removeLocomotiveChoice);
+		
+		removePassengersChoice = new JMenuItem("Passengers");
+		removePassengersChoice.addActionListener(new MenuListener());
+		removeMenu.add(removePassengersChoice);
+		
+		
 		this.getContentPane().add(centerPanel,BorderLayout.CENTER);
 		this.getContentPane().add(northPanel,BorderLayout.NORTH);
 		this.getContentPane().add(southPanel,BorderLayout.SOUTH);
 		this.getContentPane().add(eastPanel,BorderLayout.EAST);
 		this.getContentPane().add(westPanel,BorderLayout.WEST);
+		
+		JMenuBar bar = new JMenuBar();
+		bar.add(addMenu);
+		bar.add(removeMenu);
+		setJMenuBar(bar);
 		
 		repaint();
 	}
@@ -68,8 +115,6 @@ public class TrainGUI extends JFrame implements ActionListener {
 		return newPanel;
 	}
 	
-	
-
 	/* (non-Javadoc)
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
@@ -90,6 +135,20 @@ public class TrainGUI extends JFrame implements ActionListener {
 		// Show GUI
 		GUI.setResizable(false);
 		GUI.setVisible(true);
+	}
+	
+	private class MenuListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+	           Component source = (Component) e.getSource();
+	           /* System.out.println(source);
+	           if (source == redButton || source == redChoice) {
+	               redPanel.setBackground(Color.RED);
+	           } else if (source == blueButton || source == blueChoice) {
+	               bluePanel.setBackground(Color.BLUE);
+	           } else if (source == whiteButton || source == whiteChoice) {
+	               whitePanel.setBackground(Color.WHITE);
+	           } */
+	       }
 	}
 
 }

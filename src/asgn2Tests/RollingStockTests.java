@@ -19,6 +19,11 @@ import asgn2Exceptions.TrainException;
 public class RollingStockTests {
 	
 	private Vector<RollingStock> testRollingStock;
+	public static final int ZERO = 0;
+	public static final int LOCO_WEIGHT = 90;
+	public static final String LOCO_CLASS = "1E";
+	//public static final String INVALID_LOCO_POWER = "0E";
+	//public static final String INVALID_LOCO_TYPE = "1F";
 	
 	/* 
 	 * may not need this, depends on the implementation
@@ -30,18 +35,20 @@ public class RollingStockTests {
 	
 	@Test (expected = TrainException.class)
 	public void invalidGrossWeight() throws TrainException {
-		int maxInvalidWeight = 89;
-		testRollingStock.addElement(new Locomotive(maxInvalidWeight, "1E"));
+		testRollingStock.addElement(new Locomotive(ZERO, LOCO_CLASS));
+		testRollingStock.addElement(new Locomotive(ZERO, LOCO_CLASS));
 	}
 	
-	@Test
-	public void invalidLocomotivePower() {
-		//test
+	@Test (expected = TrainException.class)
+	public void invalidLocomotivePower() throws TrainException {
+		String invalidPower = "0E";
+		testRollingStock.addElement(new Locomotive(LOCO_WEIGHT, invalidPower));
 	}
 	
-	@Test
-	public void invalidLocomotiveTypeDetected() {
-		//test
+	@Test (expected = TrainException.class)
+	public void invalidLocomotiveType() throws TrainException {
+		String invalidType = "1A";
+		testRollingStock.addElement(new Locomotive(LOCO_WEIGHT, invalidType));
 	}
 	
 	@Test

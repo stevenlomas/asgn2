@@ -27,6 +27,11 @@ public class PassengerCar extends RollingStock {
 		super(grossWeight);
 		this.seats = numberOfSeats; // Specified seating capacity
 		currentPassengers = 0; // No passengers on new carriage
+		
+		if (grossWeight < 90) {
+			throw new TrainException("Locomotive may not have a gross " +
+					"weight that is less than 90 tonnes.");
+		}
 	}
 	
 	/**

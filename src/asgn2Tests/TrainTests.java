@@ -14,26 +14,20 @@ import asgn2Exceptions.TrainException;
  */
 public class TrainTests {
 	
-	private Vector<RollingStock> train = new Vector<RollingStock>();
-	private DepartingTrain testTrain;
+	//private Vector<RollingStock> train = new Vector<RollingStock>();
+	private DepartingTrain testTrain = new DepartingTrain();
 	
 	@Test
 	public void assembleValidTrain() throws TrainException {
 		RollingStock loco = new Locomotive(90, "5D");
 		RollingStock passenger = new	PassengerCar(50, 10);
 		RollingStock freight = new FreightCar(40, "G");
-		
 		testTrain.addCarriage(loco);
-		
-		/*train.addElement(loco);
-		train.addElement(passenger);
-		train.addElement(freight);*/
-		
-		
-		
-		/*testTrain.addCarriage(loco);
 		testTrain.addCarriage(passenger);
-		testTrain.addCarriage(freight);*/	
+		testTrain.addCarriage(freight);
+		assertEquals(testTrain.firstCarriage(), loco);
+		assertEquals(testTrain.nextCarriage(), passenger);
+		assertEquals(testTrain.nextCarriage(), freight);
 	}
 	
 	@Test

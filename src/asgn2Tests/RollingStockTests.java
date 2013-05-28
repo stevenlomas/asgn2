@@ -228,27 +228,56 @@ public class RollingStockTests {
 	 */
 	@Test
 	public void passengerCarPrintsCorrectly() throws TrainException {
-		int numAlighting = 2, passengers = 5;
+		int numAlighting = 2, passengers = 5, expectedPassengers = 3;
 		testRollingStock.addElement(new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS));
 		((PassengerCar)testRollingStock.elementAt(0)).board(passengers);
 		((PassengerCar)testRollingStock.elementAt(0)).alight(numAlighting);
 		String carriageString = ((PassengerCar)testRollingStock.elementAt(0)).toString();
-		assertEquals(carriageString, "Passenger(3/5)");
+		assertEquals(carriageString, "Passenger(" + 
+				expectedPassengers + "/" + PASSENGER_SEATS + ")");
+	}
+	
+	/**
+	 * Normal case - tests that the number of passengers can accumulate
+	 * over multiple instances of boarding by comparing a pre-set variable
+	 * of the number of passengers that should be on the train, against the 
+	 * actual number of passengers found with the numberOnBoard() method.
+	 * 
+	 * @throws TrainException
+	 */
+	@Test
+	public void passengersAccumulate() throws TrainException {
+		int passengers = 2, expectedPassengers = 4;
+		testRollingStock.addElement(new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS));
+		//board two lots of 2 passengers
+		((PassengerCar)testRollingStock.elementAt(0)).board(passengers);
+		((PassengerCar)testRollingStock.elementAt(0)).board(passengers);
+		int onBoard = ((PassengerCar)testRollingStock.elementAt(0)).numberOnBoard();
+		assertEquals(onBoard, expectedPassengers);
+	}
+	
+	/**
+	 * Normal case - tests that passengers can aligt by comparing the
+	 * actual number on board (with numberOnBoar()) against the expected 
+	 * number of passengers on board (expected passengers).
+	 * @throws TrainException
+	 */
+	@Test
+	public void passengersCanAlight() throws TrainException {
+		int numAlighting = 2, passengers = 5, expectedPassengers = 3;
+		testRollingStock.addElement(new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS));
+		((PassengerCar)testRollingStock.elementAt(0)).board(passengers);
+		((PassengerCar)testRollingStock.elementAt(0)).alight(numAlighting);
+		int onBoard = ((PassengerCar)testRollingStock.elementAt(0)).numberOnBoard();
+		assertEquals(onBoard, expectedPassengers);
 	}
 	
 	@Test
-	public void passengersAccumulate() {
-		//test
-	}
-	
-	@Test
-	public void passengersCanAlight() {
-		//test
-	}
-	
-	@Test
-	public void powerCalculatedCorrectly() {
-		//test
+	public void powerCalculatedCorrectly() throws TrainException {
+		//int locoWeight = 120;
+		//String locoClass = "7S";
+		testRollingStock.addElement(new Locomotive(LOCO_WEIGHT, LOCO_CLASS));
+		
 	}
 	
 	@Test

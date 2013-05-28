@@ -8,7 +8,7 @@ import asgn2Exceptions.TrainException;
  */
 public class Locomotive extends RollingStock {
 	boolean powerTooLow = false;
-	private Integer locoPower;
+	private int locoPower;
 	private String locoClass;
 	//private char locoEngineType;
 	private char[] locoClassChar; //char array to split up the classification string

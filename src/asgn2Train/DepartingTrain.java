@@ -140,9 +140,10 @@ public class DepartingTrain extends Object {
 		}
 		
 		// Find totalWeight of train
-		for (int i = 1; i < train.size(); i++) { // Loop through train
+		for (int i = 0; i < train.size(); i++) { // Loop through train
 			totalWeight += train.elementAt(i).getGrossWeight();
 		}
+		
 		// Locomotive power VS. total train weight
 		if (train.firstElement() instanceof Locomotive) {
 			if (((Locomotive)train.firstElement()).power() > totalWeight) {

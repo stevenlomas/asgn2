@@ -49,7 +49,7 @@ public class PassengerCar extends RollingStock {
 		// Find free number of seats
 		int freeSeats = seats - currentPassengers;
 		
-		if (freeSeats > newPassengers) { // Can fit, return none
+		if (freeSeats >= newPassengers) { // Can fit ALL passengers, return none
 			currentPassengers += newPassengers;
 			return 0;
 		} else { // Cannot all fit, greater than freeSeats

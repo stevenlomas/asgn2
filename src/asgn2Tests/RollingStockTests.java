@@ -24,6 +24,9 @@ public class RollingStockTests {
 	public static final int PASSENGER_WEIGHT = 50;
 	public static final int FREIGHT_WEIGHT = 40;
 	public static final String LOCO_CLASS = "1E";
+	public static final int PASSENGER_SEATS = 1;
+	public static final String FREIGHT_TYPE = "G";
+	
 	//public static final String LOCO_CLASS = "1E";
 	
 	//public static final String INVALID_LOCO_POWER = "0E";
@@ -39,16 +42,37 @@ public class RollingStockTests {
 	
 	/**
 	 * A constant of value zero is used to test that an invalid gross
-	 * weight throws an exception, as zero is not a valid weight
+	 * weight of a locomotive throws an exception, as zero is not a valid
+	 * weight
 	 * 
 	 * @throws TrainException
 	 */
 	@Test (expected = TrainException.class)
-	public void invalidGrossWeight() throws TrainException {
+	public void invalidGrossWeightLoco() throws TrainException {
 		testRollingStock.addElement(new Locomotive(ZERO, LOCO_CLASS));
-		testRollingStock.addElement(new PassengerCar(ZERO, ZERO));
-		testRollingStock.addElement(new FreightCar(ZERO, "Goods"));
-		
+	}
+	
+	/**
+	 * A constant of value zero is used to test that an invalid gross
+	 * weight of a passenger car throws an exception, as zero is not a 
+	 * valid weight
+	 * 
+	 * @throws TrainException
+	 */
+	@Test (expected = TrainException.class)
+	public void invalidGrossWeightPassenger() throws TrainException {	
+		testRollingStock.addElement(new PassengerCar(ZERO, PASSENGER_SEATS));
+	}
+	
+	/**
+	 * A constant of value zero is used to test that an invalid gross
+	 * weight of a freight car throws an exception, as zero is not a valid weight
+	 * 
+	 * @throws TrainException
+	 */	
+	@Test (expected = TrainException.class)
+	public void invalidGrossWeightFreight() throws TrainException {	
+		testRollingStock.addElement(new FreightCar(ZERO, FREIGHT_TYPE));		
 	}
 	
 	@Test (expected = TrainException.class)
@@ -64,22 +88,22 @@ public class RollingStockTests {
 	}
 	
 	@Test
-	public void invalidNumberAlighting() {
+	public void invalidNumberAlighting() throws TrainException {
 		//test
 	}
 	
 	@Test
-	public void invalidNumberBoarding() {
+	public void invalidNumberBoarding() throws TrainException {
 		//test
 	}
 	
 	@Test
-	public void invalidNumberOfSeats() {
+	public void invalidNumberOfSeats() throws TrainException {
 		//test
 	}
 	
 	@Test
-	public void locomotivePowerTooLow() {
+	public void locomotivePowerTooLow() throws TrainException {
 		//test
 	}
 	

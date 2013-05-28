@@ -272,11 +272,21 @@ public class RollingStockTests {
 		assertEquals(onBoard, expectedPassengers);
 	}
 	
+	/**
+	 * Normal case - compares the expected pulling power of the
+	 * locomotive (calculated prior) with the actual pulling power
+	 * that was calculated in the Locomotive class.
+	 * @throws TrainException
+	 */
 	@Test
 	public void powerCalculatedCorrectly() throws TrainException {
-		//int locoWeight = 120;
-		//String locoClass = "7S";
-		testRollingStock.addElement(new Locomotive(LOCO_WEIGHT, LOCO_CLASS));
+		//for simplicity I assigned the locomotive power to a variable
+		int locoWeight = 120, locoPower = 7;
+		int expectedPower = ((locoPower * 100) - locoWeight);
+		String locoClass = "7S";
+		testRollingStock.addElement(new Locomotive(locoWeight, locoClass));
+		int pullingPower = ((Locomotive)testRollingStock.elementAt(0)).power();
+		assertEquals(pullingPower, expectedPower);
 		
 	}
 	

@@ -120,7 +120,7 @@ public class RollingStockTests {
 	
 	/**
 	 * Exceptional case - tests for a negative number of seats that have
-	 * been assigned in the carriage
+	 * been assigned in the carriage.
 	 * 
 	 * @throws TrainException
 	 */
@@ -135,19 +135,51 @@ public class RollingStockTests {
 		//test
 	}
 	
-	@Test
-	public void locomotivePrintsCorrectly() {
-		//test
+	/**
+	 * Normal case - tests that the toString() method in the locomotive
+	 * class returns the string as intended.
+	 * 
+	 * @throws TrainException
+	 */
+	@Test 
+	public void locomotivePrintsCorrectly() throws TrainException{
+		String locoClass = "5D";
+		testRollingStock.addElement(new Locomotive(LOCO_WEIGHT, locoClass));
+		assertEquals(testRollingStock.elementAt(0).toString(), "Loco(5D)");		
 	}
 	
+	/**
+	 * Normal case (boundary case?) - tests that the code can handle nobody
+	 * being removed from the train.
+	 * 
+	 * @throws TrainException
+	 */
 	@Test
-	public void nobodyGetsOff() {
-		//test
+	public void nobodyGetsOff() throws TrainException {
+		int numAlighting = 0, passengers = 5, onBoard;
+		testRollingStock.addElement(new Locomotive(LOCO_WEIGHT, LOCO_CLASS));
+		testRollingStock.addElement(new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS));
+		((PassengerCar)testRollingStock.elementAt(1)).board(passengers);
+		((PassengerCar)testRollingStock.elementAt(1)).alight(numAlighting);
+		onBoard = ((PassengerCar)testRollingStock.elementAt(1)).numberOnBoard();
+		assertEquals(onBoard, passengers);
 	}
 	
+	/**
+	 * Normal case (boundary case?) - tests that the code can handle nobody
+	 * boarding the train.
+	 * 
+	 * @throws TrainException
+	 */
 	@Test
-	public void nobodyGetsOn() {
-		//test
+	public void nobodyGetsOn() throws TrainException {
+		//onBoard is set to 1 to prove that the code performs as expected
+		int passengers = 0;
+		testRollingStock.addElement(new Locomotive(LOCO_WEIGHT, LOCO_CLASS));
+		testRollingStock.addElement(new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS));
+		((PassengerCar)testRollingStock.elementAt(1)).board(passengers);
+		int onBoard = ((PassengerCar)testRollingStock.elementAt(1)).numberOnBoard();
+		assertEquals(onBoard, passengers);
 	}
 	
 	@Test
@@ -170,9 +202,16 @@ public class RollingStockTests {
 		//test
 	}
 	
+	/**
+	 * Normal case - tests that the code allows zero seats to be
+	 * allocated.
+	 * 
+	 * @throws TrainException
+	 */
 	@Test
-	public void noSeatsAllowed() {
-		//test
+	public void noSeatsAllowed() throws TrainException {
+		int numSeats = 0;
+		testRollingStock.addElement(new PassengerCar(PASSENGER_WEIGHT, numSeats));
 	}
 	
 	@Test
@@ -180,9 +219,21 @@ public class RollingStockTests {
 		//test
 	}
 	
+	/**
+	 * Normal case - tests that the toString method for the passengerCar
+	 * returns correctly. This is done by running the code correctly and
+	 * predicting the results.
+	 * 
+	 * @throws TrainException
+	 */
 	@Test
-	public void passengerCarPrintsCorrectly() {
-		//test
+	public void passengerCarPrintsCorrectly() throws TrainException {
+		int numAlighting = 2, passengers = 5;
+		testRollingStock.addElement(new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS));
+		((PassengerCar)testRollingStock.elementAt(0)).board(passengers);
+		((PassengerCar)testRollingStock.elementAt(0)).alight(numAlighting);
+		String carriageString = ((PassengerCar)testRollingStock.elementAt(0)).toString();
+		assertEquals(carriageString, "Passenger(3/5)");
 	}
 	
 	@Test

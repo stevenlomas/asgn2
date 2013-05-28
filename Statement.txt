@@ -14,7 +14,10 @@ authoring the RollingStock and TrainException classes, with Grant writing the
 Locomotive class except for some minor changes by myself. I did not contribute in
 any meaningful way to both the Test classes RollingStockTests and TrainTests.
 
-Grant O'Meara: 
+Grant O'Meara: I completed the test classes (RollingStockTests.java and TrainTests.java)
+as well as mostly creating the Locomotive class and working on an early version of
+RollingStock that is significantly modified from my contribution as well as finishing off
+the TrainException class.
 
 
 GUI Editing

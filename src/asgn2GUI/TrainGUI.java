@@ -33,6 +33,7 @@ public class TrainGUI extends JFrame implements ActionListener {
 	private JLabel currentLoad;
 	private JLabel currentPassengers;
 	private JLabel totalSeats;
+	private JLabel remainingCapacity;
 	private JLabel capacity;
 	
 	// Add Menu
@@ -78,6 +79,7 @@ public class TrainGUI extends JFrame implements ActionListener {
 		currentLoad = createLabel("");
 		currentPassengers = createLabel("");
 		totalSeats = createLabel("");
+		remainingCapacity = createLabel("");
 		capacity = createLabel("");
 		
 		/* Add Menu */
@@ -116,6 +118,7 @@ public class TrainGUI extends JFrame implements ActionListener {
 		westPanel.add(currentLoad);
 		westPanel.add(currentPassengers);
 		westPanel.add(totalSeats);
+		westPanel.add(remainingCapacity);
 		westPanel.add(capacity);
 		
 		/* Setup Menus */
@@ -180,13 +183,15 @@ public class TrainGUI extends JFrame implements ActionListener {
 		} else { // Train cannot move
 			currentLoad.setText(" Weight: Overloaded");
 		}
+		
+		currentPassengers.setText(" Passengers: " + String.valueOf(passengers));
+		remainingCapacity.setText(" Empty Seats: " + String.valueOf(freeSeats));
+		totalSeats.setText(" Total Seats: " + String.valueOf(seats));
 		if (freeSeats > 0) { // Seats available
 			capacity.setText(" Capacity: Not full");
-		} else {
+		} else { // No seats available
 			capacity.setText(" Capacity: Full");
 		}
-		currentPassengers.setText(" Passengers: " + String.valueOf(passengers));
-		totalSeats.setText(" Seats: " + String.valueOf(seats));
 		
 		/* centerPanel text */
 		textDisplay.setText("Train: " + Train.toString());

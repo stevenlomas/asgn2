@@ -7,6 +7,7 @@ import javax.swing.*;
 
 import asgn2Train.DepartingTrain;
 //import asgn2RollingStock.*;
+import asgn2Exceptions.TrainException;
 
 /**
  * @author Steven Lomas
@@ -66,6 +67,9 @@ public class TrainGUI extends JFrame implements ActionListener {
 		southPanel = createPanel(Color.LIGHT_GRAY);
 		eastPanel = createPanel(Color.LIGHT_GRAY);
 		westPanel = createPanel(Color.LIGHT_GRAY);
+		
+		westPanel.setLayout(new BoxLayout(westPanel, BoxLayout.Y_AXIS));
+		westPanel.setSize(WIDTH - 500, HEIGHT - 50);
 		
 		/* Labels */
 		currentLoad = createLabel("");
@@ -201,18 +205,23 @@ public class TrainGUI extends JFrame implements ActionListener {
 	}
 	
 	private class MenuListener implements ActionListener {
+		
 		public void actionPerformed(ActionEvent e) {
-	           Component source = (Component) e.getSource();
-	           /* System.out.println(source);
-	           if (source == redButton || source == redChoice) {
-	               redPanel.setBackground(Color.RED);
-	           } else if (source == blueButton || source == blueChoice) {
-	               bluePanel.setBackground(Color.BLUE);
-	           } else if (source == whiteButton || source == whiteChoice) {
-	               whitePanel.setBackground(Color.WHITE);
-	           } */
-	           UpdateInformation();
-	       }
+           Component source = (Component) e.getSource();
+           if (source == removeLocomotiveChoice) { // Remove Locomotive
+        	   try {
+				Train.removeCarriage();
+				} catch (TrainException e1) {
+					errorHandler(e1);
+				}
+           }
+           
+           UpdateInformation();
+		}
+		
+		private void errorHandler(TrainException e) {
+			JOptionPane.showMessageDialog(null, e, "Error: Train Exception",
+					JOptionPane.ERROR_MESSAGE);
+		}
 	}
-
 }

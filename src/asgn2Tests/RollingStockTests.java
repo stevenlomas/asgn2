@@ -18,7 +18,7 @@ import asgn2Exceptions.TrainException;
  */
 public class RollingStockTests {
 	
-	private Vector<RollingStock> testRollingStock = new Vector<RollingStock>();
+	private RollingStock testRollingStock;
 	public static final int ZERO = 0;
 	public static final int LOCO_WEIGHT = 90;
 	public static final int PASSENGER_WEIGHT = 50;
@@ -26,18 +26,6 @@ public class RollingStockTests {
 	public static final String LOCO_CLASS = "5E";
 	public static final int PASSENGER_SEATS = 5;
 	public static final String FREIGHT_TYPE = "G";
-	
-	//public static final String LOCO_CLASS = "1E";
-	//public static final String INVALID_LOCO_POWER = "0E";
-	//public static final String INVALID_LOCO_TYPE = "1F";
-	
-	/* 
-	 * may not need this, depends on the implementation
-	 */
-	/*@Before
-	public void setUp() {
-		testRollingStock = new RollingStock(0);
-	}*/
 	
 	/**
 	 * A constant of value zero is used to test that an invalid gross
@@ -48,60 +36,84 @@ public class RollingStockTests {
 	 */
 	@Test (expected = TrainException.class)
 	public void invalidGrossWeightLoco() throws TrainException {
-		testRollingStock.addElement(new Locomotive(ZERO, LOCO_CLASS));
+		testRollingStock = new Locomotive(ZERO, LOCO_CLASS);
 	}
 	
 	/**
-	 * A constant of value zero is used to test that an invalid gross
-	 * weight of a passenger car throws an exception, as zero is not a 
-	 * valid weight
+	 * Exceptional test - A constant of value zero is used to test that 
+	 * an invalid gross weight of a passenger car throws an exception, as
+	 * zero is not a valid weight
 	 * 
 	 * @throws TrainException
 	 */
 	@Test (expected = TrainException.class)
 	public void invalidGrossWeightPassenger() throws TrainException {	
-		testRollingStock.addElement(new PassengerCar(ZERO, PASSENGER_SEATS));
+		testRollingStock = new PassengerCar(ZERO, PASSENGER_SEATS);
 	}
 	
 	/**
-	 * A constant of value zero is used to test that an invalid gross
+	 * Exceptional test -A constant of value zero is used to test that an invalid gross
 	 * weight of a freight car throws an exception, as zero is not a valid weight
 	 * 
 	 * @throws TrainException
 	 */	
 	@Test (expected = TrainException.class)
 	public void invalidGrossWeightFreight() throws TrainException {	
-		testRollingStock.addElement(new FreightCar(ZERO, FREIGHT_TYPE));		
+		testRollingStock = new FreightCar(ZERO, FREIGHT_TYPE);		
 	}
 	
+	/**
+	 * Exceptional test - tests that an exception is thrown when
+	 * an invalid char is put as the power in the classification string.
+	 * 
+	 * @throws TrainException
+	 */
 	@Test (expected = TrainException.class)
 	public void invalidLocomotivePower() throws TrainException {
 		String invalidPower = "0E";
-		testRollingStock.addElement(new Locomotive(LOCO_WEIGHT, invalidPower));
+		testRollingStock = new Locomotive(LOCO_WEIGHT, invalidPower);
 	}
 	
+	/**
+	 * Exceptional test - tests that an exception is thrown when
+	 * an invalid char is put as the engine type in the classification
+	 * string.
+	 * 
+	 * @throws TrainException
+	 */
 	@Test (expected = TrainException.class)
 	public void invalidLocomotiveType() throws TrainException {
 		String invalidType = "1A";
-		testRollingStock.addElement(new Locomotive(LOCO_WEIGHT, invalidType));
+		testRollingStock = new Locomotive(LOCO_WEIGHT, invalidType);
 	}
 	
+	/**
+	 * Exceptional test - tests that an exception is thrown when a
+	 * negative number of passengers are alighted.
+	 * 
+	 * @throws TrainException
+	 */
 	@Test (expected = TrainException.class)
 	public void invalidNumberAlightingNegative() throws TrainException {
 		int numAlighting = -1, passengers = 5;
-		testRollingStock.addElement(new Locomotive(LOCO_WEIGHT, LOCO_CLASS));
-		testRollingStock.addElement(new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS));
-		((PassengerCar)testRollingStock.elementAt(1)).board(passengers);
-		((PassengerCar)testRollingStock.elementAt(1)).alight(numAlighting);
+		testRollingStock = new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS);
+		((PassengerCar)testRollingStock).board(passengers);
+		((PassengerCar)testRollingStock).alight(numAlighting);
 	}
 	
+	/**
+	 * Exceptional test - tests than an exception is thrown when the
+	 * number of passengers to be alighed is greater than the number
+	 * of passengers on the train.
+	 * 
+	 * @throws TrainException
+	 */
 	@Test (expected = TrainException.class)
 	public void invalidNumberAlightingTooMany() throws TrainException {
 		int numAlighting = 6, passengers = 5;
-		testRollingStock.addElement(new Locomotive(LOCO_WEIGHT, LOCO_CLASS));
-		testRollingStock.addElement(new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS));
-		((PassengerCar)testRollingStock.elementAt(1)).board(passengers);
-		((PassengerCar)testRollingStock.elementAt(1)).alight(numAlighting);
+		testRollingStock = new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS);
+		((PassengerCar)testRollingStock).board(passengers);
+		((PassengerCar)testRollingStock).alight(numAlighting);
 	}
 	
 	/**
@@ -113,9 +125,8 @@ public class RollingStockTests {
 	@Test (expected = TrainException.class)
 	public void invalidNumberBoarding() throws TrainException {
 		int passengers = -1;
-		testRollingStock.addElement(new Locomotive(LOCO_WEIGHT, LOCO_CLASS));
-		testRollingStock.addElement(new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS));
-		((PassengerCar)testRollingStock.elementAt(1)).board(passengers);
+		testRollingStock = new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS);
+		((PassengerCar)testRollingStock).board(passengers);
 	}
 	
 	/**
@@ -127,7 +138,7 @@ public class RollingStockTests {
 	@Test (expected = TrainException.class)
 	public void invalidNumberOfSeats() throws TrainException {
 		int numSeats = -1;
-		testRollingStock.addElement(new PassengerCar(PASSENGER_WEIGHT, numSeats));
+		testRollingStock = new PassengerCar(PASSENGER_WEIGHT, numSeats);
 	}
 	
 	@Test
@@ -144,8 +155,8 @@ public class RollingStockTests {
 	@Test 
 	public void locomotivePrintsCorrectly() throws TrainException{
 		String locoClass = "5D";
-		testRollingStock.addElement(new Locomotive(LOCO_WEIGHT, locoClass));
-		assertEquals(testRollingStock.elementAt(0).toString(), "Loco(5D)");		
+		testRollingStock = new Locomotive(LOCO_WEIGHT, locoClass);
+		assertEquals(((Locomotive)testRollingStock).toString(), "Loco(5D)");		
 	}
 	
 	/**
@@ -157,11 +168,10 @@ public class RollingStockTests {
 	@Test
 	public void nobodyGetsOff() throws TrainException {
 		int numAlighting = 0, passengers = 5, onBoard;
-		testRollingStock.addElement(new Locomotive(LOCO_WEIGHT, LOCO_CLASS));
-		testRollingStock.addElement(new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS));
-		((PassengerCar)testRollingStock.elementAt(1)).board(passengers);
-		((PassengerCar)testRollingStock.elementAt(1)).alight(numAlighting);
-		onBoard = ((PassengerCar)testRollingStock.elementAt(1)).numberOnBoard();
+		testRollingStock = new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS);
+		((PassengerCar)testRollingStock).board(passengers);
+		((PassengerCar)testRollingStock).alight(numAlighting);
+		onBoard = ((PassengerCar)testRollingStock).numberOnBoard();
 		assertEquals(onBoard, passengers);
 	}
 	
@@ -175,10 +185,9 @@ public class RollingStockTests {
 	public void nobodyGetsOn() throws TrainException {
 		//onBoard is set to 1 to prove that the code performs as expected
 		int passengers = 0;
-		testRollingStock.addElement(new Locomotive(LOCO_WEIGHT, LOCO_CLASS));
-		testRollingStock.addElement(new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS));
-		((PassengerCar)testRollingStock.elementAt(1)).board(passengers);
-		int onBoard = ((PassengerCar)testRollingStock.elementAt(1)).numberOnBoard();
+		testRollingStock = new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS);
+		((PassengerCar)testRollingStock).board(passengers);
+		int onBoard = ((PassengerCar)testRollingStock).numberOnBoard();
 		assertEquals(onBoard, passengers);
 	}
 	
@@ -210,13 +219,23 @@ public class RollingStockTests {
 	 */
 	@Test
 	public void noSeatsAllowed() throws TrainException {
-		int numSeats = 0;
-		testRollingStock.addElement(new PassengerCar(PASSENGER_WEIGHT, numSeats));
+		int numSeats = 0, expected = 0;
+		testRollingStock = new PassengerCar(PASSENGER_WEIGHT, numSeats);
+		assertEquals(((PassengerCar)testRollingStock).numberOfSeats(), expected);
+		
 	}
 	
+	/**
+	 * Normal case - tests that the number of seats is remembered after assignment
+	 * by comparing the expected amount the the integer returned from numberOfSeats().
+	 * @throws TrainException
+	 */
 	@Test
-	public void numberOfSeatsRemembered() {
-		//test
+	public void numberOfSeatsRemembered() throws TrainException {
+		int expectedSeats = 5;
+		testRollingStock = new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS);
+		int numSeats = ((PassengerCar)testRollingStock).numberOfSeats();
+		assertEquals(numSeats, expectedSeats);
 	}
 	
 	/**
@@ -229,10 +248,10 @@ public class RollingStockTests {
 	@Test
 	public void passengerCarPrintsCorrectly() throws TrainException {
 		int numAlighting = 2, passengers = 5, expectedPassengers = 3;
-		testRollingStock.addElement(new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS));
-		((PassengerCar)testRollingStock.elementAt(0)).board(passengers);
-		((PassengerCar)testRollingStock.elementAt(0)).alight(numAlighting);
-		String carriageString = ((PassengerCar)testRollingStock.elementAt(0)).toString();
+		testRollingStock = new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS);
+		((PassengerCar)testRollingStock).board(passengers);
+		((PassengerCar)testRollingStock).alight(numAlighting);
+		String carriageString = ((PassengerCar)testRollingStock).toString();
 		assertEquals(carriageString, "Passenger(" + 
 				expectedPassengers + "/" + PASSENGER_SEATS + ")");
 	}
@@ -248,11 +267,11 @@ public class RollingStockTests {
 	@Test
 	public void passengersAccumulate() throws TrainException {
 		int passengers = 2, expectedPassengers = 4;
-		testRollingStock.addElement(new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS));
+		testRollingStock = new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS);
 		//board two lots of 2 passengers
-		((PassengerCar)testRollingStock.elementAt(0)).board(passengers);
-		((PassengerCar)testRollingStock.elementAt(0)).board(passengers);
-		int onBoard = ((PassengerCar)testRollingStock.elementAt(0)).numberOnBoard();
+		((PassengerCar)testRollingStock).board(passengers);
+		((PassengerCar)testRollingStock).board(passengers);
+		int onBoard = ((PassengerCar)testRollingStock).numberOnBoard();
 		assertEquals(onBoard, expectedPassengers);
 	}
 	
@@ -260,15 +279,16 @@ public class RollingStockTests {
 	 * Normal case - tests that passengers can aligt by comparing the
 	 * actual number on board (with numberOnBoar()) against the expected 
 	 * number of passengers on board (expected passengers).
+	 * 
 	 * @throws TrainException
 	 */
 	@Test
 	public void passengersCanAlight() throws TrainException {
 		int numAlighting = 2, passengers = 5, expectedPassengers = 3;
-		testRollingStock.addElement(new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS));
-		((PassengerCar)testRollingStock.elementAt(0)).board(passengers);
-		((PassengerCar)testRollingStock.elementAt(0)).alight(numAlighting);
-		int onBoard = ((PassengerCar)testRollingStock.elementAt(0)).numberOnBoard();
+		testRollingStock = new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS);
+		((PassengerCar)testRollingStock).board(passengers);
+		((PassengerCar)testRollingStock).alight(numAlighting);
+		int onBoard = ((PassengerCar)testRollingStock).numberOnBoard();
 		assertEquals(onBoard, expectedPassengers);
 	}
 	
@@ -276,6 +296,7 @@ public class RollingStockTests {
 	 * Normal case - compares the expected pulling power of the
 	 * locomotive (calculated prior) with the actual pulling power
 	 * that was calculated in the Locomotive class.
+	 * 
 	 * @throws TrainException
 	 */
 	@Test
@@ -284,18 +305,29 @@ public class RollingStockTests {
 		int locoWeight = 120, locoPower = 7;
 		int expectedPower = ((locoPower * 100) - locoWeight);
 		String locoClass = "7S";
-		testRollingStock.addElement(new Locomotive(locoWeight, locoClass));
-		int pullingPower = ((Locomotive)testRollingStock.elementAt(0)).power();
+		testRollingStock = new Locomotive(locoWeight, locoClass);
+		int pullingPower = ((Locomotive)testRollingStock).power();
 		assertEquals(pullingPower, expectedPower);
 		
 	}
 	
-	@Test
-	public void tooManyAlighting() {
-		//test
+	/**
+	 * Exceptional case - tests that an exception is thrown when
+	 * the program attempts to alight more passengers that are 
+	 * currently on the train.
+	 * 
+	 * @throws TrainException
+	 */
+	@Test (expected = TrainException.class)
+	public void tooManyAlighting() throws TrainException {
+		int numAlighting = 5, passengers = 4;
+		testRollingStock = new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS);
+		((PassengerCar)testRollingStock).board(passengers);
+		((PassengerCar)testRollingStock).alight(numAlighting);
 	}
 	
-	@Test
+	//might not need to be tested
+	/*@Test
 	public void validFreightCarTypes() {
 		//test
 	}
@@ -303,6 +335,6 @@ public class RollingStockTests {
 	@Test
 	public void validLocomotiveCodes() {
 		//test
-	}
+	}*/
 }
 

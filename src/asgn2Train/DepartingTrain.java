@@ -155,9 +155,8 @@ public class DepartingTrain extends Object {
 			} else {
 				return false;
 			}
-		} else {
-			// First Carriage not Locomotive. Train incorrectly configured?
-			return true;
+		} else { // First Carriage not Locomotive. Train incorrectly configured!
+			return false;
 		}
 	}
 	

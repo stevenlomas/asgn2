@@ -29,6 +29,9 @@ public class PassengerCar extends RollingStock {
 		if (grossWeight < 50) {
 			throw new TrainException("Min weight of Passenger car is 50t");
 		}
+		if (numberOfSeats < 0) {
+			throw new TrainException("Invalid number of seats - cannot be negative");
+		}
 		
 		this.seats = numberOfSeats; // Specified seating capacity
 		currentPassengers = 0; // No passengers on new carriage

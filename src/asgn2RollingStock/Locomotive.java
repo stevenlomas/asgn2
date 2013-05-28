@@ -26,8 +26,8 @@ public class Locomotive extends RollingStock {
      throws TrainException {
 		super(grossWeight);
 		
-		//90 tonnes was chosen as it was mentioned to be the average min 
-		//weight of a locomotive in the assignment spec
+		//We assume that the minimum weight for a loco is 90 tonnes, as that
+		//weight was mentioned in the javadoc
 		if (grossWeight < 90) {
 			throw new TrainException("Min weight of Locomotive is 90t");
 		}

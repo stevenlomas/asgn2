@@ -1,10 +1,7 @@
 package asgn2Tests;
 
-import java.util.Vector;
-
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.Before;
 import asgn2RollingStock.RollingStock;
 import asgn2RollingStock.Locomotive;
 import asgn2RollingStock.FreightCar;
@@ -141,10 +138,12 @@ public class RollingStockTests {
 		testRollingStock = new PassengerCar(PASSENGER_WEIGHT, numSeats);
 	}
 	
-	@Test
+	/*@Test
 	public void locomotivePowerTooLow() throws TrainException {
-		//test
-	}
+		int locoWeight = 250;
+		String locoClass = "2D";
+		testRollingStock = new Locomotive(locoWeight, locoClass);	
+	}/*
 	
 	/**
 	 * Normal case - tests that the toString() method in the locomotive
@@ -189,26 +188,6 @@ public class RollingStockTests {
 		((PassengerCar)testRollingStock).board(passengers);
 		int onBoard = ((PassengerCar)testRollingStock).numberOnBoard();
 		assertEquals(onBoard, passengers);
-	}
-	
-	@Test
-	public void noExtraRollingStockPublicConstructor() {
-		//test
-	}
-	
-	@Test
-	public void noExtraRollingStockPublicFields() {
-		//test
-	}
-	
-	@Test
-	public void noExtraRollingStockPublicMethods() {
-		//test
-	}
-	
-	@Test
-	public void noOneOnBoardInitially() {
-		//test
 	}
 	
 	/**
@@ -325,16 +304,33 @@ public class RollingStockTests {
 		((PassengerCar)testRollingStock).board(passengers);
 		((PassengerCar)testRollingStock).alight(numAlighting);
 	}
-	
-	//might not need to be tested
-	/*@Test
-	public void validFreightCarTypes() {
-		//test
+
+	/**
+	 * Normal case - tests that valid freight car types are assigned without
+	 * errors
+	 * 
+	 * @throws TrainException
+	 */
+	@Test
+	public void validFreightCarTypes() throws TrainException {
+		String freightType = "G";
+		testRollingStock = new FreightCar(FREIGHT_WEIGHT, freightType);
+		String actualType = ((FreightCar)testRollingStock).toString();
+		assertEquals(actualType, "Freight(G)");
 	}
 	
+	/**
+	 * Normal case - tests that valid loco types are assigned without 
+	 * errors
+	 * 
+	 * @throws TrainException
+	 */
 	@Test
-	public void validLocomotiveCodes() {
-		//test
-	}*/
+	public void validLocomotiveCodes() throws TrainException {
+		String locoClass = "5D";
+		testRollingStock = new Locomotive(LOCO_WEIGHT, locoClass);
+		String actualClass = ((Locomotive)testRollingStock).toString();
+		assertEquals(actualClass, "Loco(5D)");
+	}
 }
 

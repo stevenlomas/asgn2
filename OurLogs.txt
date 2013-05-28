@@ -1,6 +1,899 @@
-As part of the spec, you supposed to provide some evidence of your usage of source control 
-systems. This is something which should be very light, and you should use the source control tools to help you. I will give very simple instructions for git; those using other tools should look at the help files for the equivalent. The easiest thing to do is to use the git log command. As far as I am concerned, take the output from this command, and copy and paste it into a text file called OurLogs.txt. A guide to usage may be found here: 
-http://git-scm.com/book/en/Git-Basics-Viewing-the-Commit-History
+commit 0055181399344ebed7dcd780764759e5a2d16d4e
+Author: Steven Lomas <ldsiphons@hotmail.com>
+Date:   Tue May 28 23:47:33 2013 +1000
 
-I don’t think that it is necessary for our purposes for you to use the more sophisticated 
-options. 
+    Scripts
+
+ OurTests.docx | Bin 0 -> 11669 bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 4cbb59cb154f1b34199d2984d83e52cf0ac091d0
+Author: Grant <Grant@172.19.2.159>
+Date:   Tue May 28 23:47:44 2013 +1000
+
+    statement
+
+ Statement.txt | 63 +++++++++++++++++++++++++++++++----------------------------
+ 1 file changed, 33 insertions(+), 30 deletions(-)
+
+commit a86c311ad9b3ed5226c022cf48335d1ebfc2d520
+Author: Grant <Grant@172.19.2.159>
+Date:   Tue May 28 23:43:48 2013 +1000
+
+    final
+
+ src/asgn2Tests/TrainTests.java | 17 -----------------
+ 1 file changed, 17 deletions(-)
+
+commit 61f033c368fbd78d70c5cf57d132e222fb887aac
+Author: stevenlomas <ldsiphons@hotmail.com>
+Date:   Tue May 28 23:40:15 2013 +1000
+
+    Update Statement.txt
+
+ Statement.txt | 46 +++++++++++++++++++++++++++-------------------
+ 1 file changed, 27 insertions(+), 19 deletions(-)
+
+commit ba05784f0350ca6566574623d1804b81d4649a19
+Author: Grant <Grant@172.19.2.159>
+Date:   Tue May 28 23:31:17 2013 +1000
+
+    Final test cases.
+
+ src/asgn2Tests/RollingStockTests.java | 114 ++++++++++++++++++++++------------
+ src/asgn2Tests/TrainTests.java        | 109 ++++++++++++++++++++++++--------
+ 2 files changed, 157 insertions(+), 66 deletions(-)
+
+commit a72b99406f61407a78176426195c10a981659f52
+Author: Steven Lomas <ldsiphons@hotmail.com>
+Date:   Tue May 28 23:28:10 2013 +1000
+
+    Updated
+    
+    Fixed minor errors.
+
+ src/asgn2GUI/TrainGUI.java            | 1 -
+ src/asgn2RollingStock/Locomotive.java | 2 +-
+ src/asgn2Train/DepartingTrain.java    | 3 ++-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+commit 6fa248e69e2dd91fbda19b161cf49143b3705396
+Author: Steven Lomas <ldsiphons@hotmail.com>
+Date:   Tue May 28 23:18:50 2013 +1000
+
+    Reverted power()
+    
+    Reverted power() to match Javadoc: NB: This figure includes the weight
+    of the locomotive itself.
+
+ src/asgn2RollingStock/Locomotive.java | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+commit a715ce1670c317e081b40af8d417bb173f28ded4
+Author: Steven Lomas <ldsiphons@hotmail.com>
+Date:   Tue May 28 23:09:10 2013 +1000
+
+    Updated
+    
+    Mostly finished, checks input, all functions working without error.
+
+ src/asgn2GUI/TrainGUI.java | 101 +++++++++++++++++++++++++++++++++++----------
+ 1 file changed, 80 insertions(+), 21 deletions(-)
+
+commit b0de72c2d5b77410ff69b9ec3d015c66d7856cff
+Author: Steven Lomas <ldsiphons@hotmail.com>
+Date:   Tue May 28 22:32:38 2013 +1000
+
+    Updated
+    
+    Significantly changed functionality of adding new carriages in TrainGUI
+
+ src/asgn2GUI/TrainGUI.java         | 142 ++++++++++++++++++++++++++++++-------
+ src/asgn2Train/DepartingTrain.java |   3 -
+ 2 files changed, 116 insertions(+), 29 deletions(-)
+
+commit e01969686bce06eca8436ba20d3e46e10626f979
+Author: Grant <Grant@172.19.2.159>
+Date:   Tue May 28 22:30:48 2013 +1000
+
+    Left some commented out code in TrainTests
+
+ src/asgn2Tests/TrainTests.java | 26 +-------------------------
+ 1 file changed, 1 insertion(+), 25 deletions(-)
+
+commit 19ae807221c45369613831e5c1e3d276186c3fbf
+Author: Grant <Grant@172.19.2.159>
+Date:   Tue May 28 22:29:12 2013 +1000
+
+    I think I've finished traintest.java but you might want to look through
+    it to see if I've missed anything. Especially
+    cantIterateThroughCarriages test case as I'm not sure thats what they
+    wanted me to do. I also don't think there are enough test cases and I
+    can keep working on this but I though it would be best if I commited
+    this now.
+
+ src/asgn2Tests/TrainTests.java     | 302 ++++++++++++++++++++++++++++++-------
+ src/asgn2Train/DepartingTrain.java |   3 +-
+ 2 files changed, 248 insertions(+), 57 deletions(-)
+
+commit 8fdc3ce0d3bb45179fe4c46f044246b039b37bd0
+Author: Steven Lomas <ldsiphons@hotmail.com>
+Date:   Tue May 28 21:09:55 2013 +1000
+
+    Updated method name in DepartingTrain
+    
+    canMove() is now trainCanMove(). Functionality remains the same.
+    
+    Fixed logic in nextCarriage.
+
+ src/asgn2GUI/TrainGUI.java         | 53 ++++++++++++++++++++++++++++----------
+ src/asgn2Train/DepartingTrain.java |  6 ++---
+ 2 files changed, 43 insertions(+), 16 deletions(-)
+
+commit 6493e71a8a4360b820d165de9911a4e62ac53e29
+Author: Grant <Grant@172.19.2.159>
+Date:   Tue May 28 20:55:31 2013 +1000
+
+    First test case done, realised the stupid mistake.
+
+ src/asgn2Tests/TrainTests.java | 18 ++++++------------
+ 1 file changed, 6 insertions(+), 12 deletions(-)
+
+commit 6a9d11add0af899cb9fe618cc3c8c3c40994ba44
+Author: Grant <Grant@172.19.2.159>
+Date:   Tue May 28 20:50:21 2013 +1000
+
+    Starting traintests, a little lost at the moment.
+
+ src/asgn2Tests/RollingStockTests.java |  5 +---
+ src/asgn2Tests/TrainTests.java        | 51 +++++++++++++++--------------------
+ 2 files changed, 22 insertions(+), 34 deletions(-)
+
+commit 9cd21e69332eb5585c6e9ecfd3a318dc4486c331
+Author: Grant <Grant@172.19.2.159>
+Date:   Tue May 28 20:20:41 2013 +1000
+
+    Fixed an error.
+
+ src/asgn2Tests/RollingStockTests.java | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+commit 89f3c32b09d0df9ed7c2a989f8cfc8325c361b01
+Author: Grant <Grant@172.19.2.159>
+Date:   Tue May 28 20:18:52 2013 +1000
+
+    RollingStockTests completed (as far as I can tell). There is a commented
+    out section that includes the powertoolow test, not sure what to do with
+    that really.
+
+ src/asgn2Tests/RollingStockTests.java | 64 ++++++++++++++++-------------------
+ 1 file changed, 30 insertions(+), 34 deletions(-)
+
+commit 92e5d80b471005130582f8e91a409b60c2ed6b66
+Author: Grant <Grant@172.19.2.159>
+Date:   Tue May 28 20:17:15 2013 +1000
+
+    Added condition to set a bool to false if the train's power is too low,
+    not sure where to go from there.
+
+ src/asgn2RollingStock/Locomotive.java | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+commit 1b5cb534cea2c7e7e980d43d3933bfae7ec3c124
+Author: Steven Lomas <ldsiphons@hotmail.com>
+Date:   Tue May 28 19:51:04 2013 +1000
+
+    Updated
+    
+    nextCarriage now loops iterator.
+
+ src/asgn2GUI/TrainGUI.java         | 5 ++---
+ src/asgn2Train/DepartingTrain.java | 5 +++--
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+
+commit eca9a0b4028dbfce52a61b738e8cf42cbb6542aa
+Author: Steven Lomas <ldsiphons@hotmail.com>
+Date:   Tue May 28 19:37:29 2013 +1000
+
+    Updated
+    
+    Most functionality now working (pseudo data at the moment).
+
+ src/asgn2GUI/TrainGUI.java | 69 ++++++++++++++++++++++++++++++++--------------
+ 1 file changed, 49 insertions(+), 20 deletions(-)
+
+commit 668a34165aa30fe6ca2aa48edba071af24bc3e1c
+Author: Grant <Grant@172.19.2.159>
+Date:   Tue May 28 19:28:30 2013 +1000
+
+    Almost finished all test cases in rollingstock
+
+ src/asgn2Tests/RollingStockTests.java | 168 ++++++++++++++++++++--------------
+ 1 file changed, 100 insertions(+), 68 deletions(-)
+
+commit c83585ae4fa3162f937d5e38dd936d98b2e0b850
+Author: Steven Lomas <ldsiphons@hotmail.com>
+Date:   Tue May 28 18:54:12 2013 +1000
+
+    Updated
+    
+    Small updates, still missing large chunks of functionality.
+
+ src/asgn2GUI/TrainGUI.java | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
+
+commit 73ed996cd6190dbb744baa0bdb9fcb9687190e10
+Author: Grant <Grant@172.19.2.159>
+Date:   Tue May 28 18:50:14 2013 +1000
+
+    Test to see if I can commit change to this file.
+
+ src/asgn2RollingStock/Locomotive.java | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit 2a513c1e99be6741bee4ff4dd4a5ac88b5ae6d61
+Author: Grant <Grant@172.19.2.159>
+Date:   Tue May 28 18:48:22 2013 +1000
+
+    More test cases
+
+ src/asgn2Tests/RollingStockTests.java | 16 +++++++++++++---
+ 1 file changed, 13 insertions(+), 3 deletions(-)
+
+commit 5b53d754167d08a22afa6e9da89e56167fa92a47
+Author: Steven Lomas <ldsiphons@hotmail.com>
+Date:   Tue May 28 18:39:28 2013 +1000
+
+    Updated
+    
+    Added small amounts of functionality
+    Improved code layout and flow
+
+ src/asgn2GUI/TrainGUI.java | 110 +++++++++++++++++++++++++--------------------
+ 1 file changed, 62 insertions(+), 48 deletions(-)
+
+commit 5282cbd9464529dfe71564328b4b513624dab6d5
+Author: Grant <Grant@172.19.2.159>
+Date:   Tue May 28 18:33:12 2013 +1000
+
+    Test case updates
+
+ src/asgn2Tests/RollingStockTests.java | 45 ++++++++++++++++++++++++++++-------
+ 1 file changed, 37 insertions(+), 8 deletions(-)
+
+commit 91c765ff149369a30a490c8f9d40b5ad5e97defd
+Author: Grant <Grant@172.19.2.159>
+Date:   Tue May 28 18:20:16 2013 +1000
+
+    Test cases update
+
+ src/asgn2Tests/RollingStockTests.java | 75 +++++++++++++++++++++++++++++------
+ 1 file changed, 63 insertions(+), 12 deletions(-)
+
+commit 1e1dfe29a2923cf2ca28dde4b63dd5bf609941e5
+Author: Grant <Grant@172.19.2.159>
+Date:   Tue May 28 17:47:22 2013 +1000
+
+    Update test cases
+
+ src/asgn2Tests/RollingStockTests.java | 40 +++++++++++++++++++++++++----------
+ 1 file changed, 29 insertions(+), 11 deletions(-)
+
+commit 864c470fecb970c995da6617a106714010ed1b7b
+Author: Grant <Grant@172.19.2.159>
+Date:   Tue May 28 17:30:24 2013 +1000
+
+    Tests
+
+ src/asgn2Tests/RollingStockTests.java | 16 +++++++++++++---
+ 1 file changed, 13 insertions(+), 3 deletions(-)
+
+commit c175a3ab85fd94d5d2cb685db88195244cf88282
+Author: Steven Lomas <ldsiphons@hotmail.com>
+Date:   Tue May 28 17:22:46 2013 +1000
+
+    Updated
+    
+    Added error handler
+
+ src/asgn2GUI/TrainGUI.java | 33 +++++++++++++++++++++------------
+ 1 file changed, 21 insertions(+), 12 deletions(-)
+
+commit c4ce159bd03d0efafa766dcd89763e65637f13dd
+Author: Steven Lomas <ldsiphons@hotmail.com>
+Date:   Tue May 28 16:50:27 2013 +1000
+
+    Updated
+    
+    Fixed DepartingTrain once again, silly error.
+    
+    Slowly adding elements to GUI, still very incomplete.
+
+ src/asgn2GUI/TrainGUI.java         | 74 +++++++++++++++++++++++++++++++++++---
+ src/asgn2Train/DepartingTrain.java |  2 +-
+ 2 files changed, 70 insertions(+), 6 deletions(-)
+
+commit c17468675a5c01a4d5475df0d22ef0920523d2ef
+Author: Grant <Grant@172.19.2.159>
+Date:   Tue May 28 16:36:35 2013 +1000
+
+    Fixed some tests
+
+ src/asgn2Tests/RollingStockTests.java | 42 +++++++++++++++++++++++++++--------
+ 1 file changed, 33 insertions(+), 9 deletions(-)
+
+commit 98ca450e6bbef40fdaa8b89a677f6b9943ac9567
+Author: Steven Lomas <ldsiphons@hotmail.com>
+Date:   Tue May 28 15:54:02 2013 +1000
+
+    Updated
+    
+    Added menu, no functionality yet.
+    
+    Information labels are coming next.
+
+ src/asgn2GUI/TrainGUI.java | 63 ++++++++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 61 insertions(+), 2 deletions(-)
+
+commit 27d7a8b79cb55480d5018e7bf14e6550a097cb1d
+Author: Grant <Grant@172.19.2.159>
+Date:   Tue May 28 15:37:49 2013 +1000
+
+    Added negative seats exception to PassengerCar.
+
+ src/asgn2RollingStock/Locomotive.java   | 4 ++--
+ src/asgn2RollingStock/PassengerCar.java | 3 +++
+ 2 files changed, 5 insertions(+), 2 deletions(-)
+
+commit 037a852267c079d711ecdf467c276ea4cf4667c0
+Author: Grant <Grant@172.19.2.159>
+Date:   Tue May 28 15:23:58 2013 +1000
+
+    Updated cars with weight exceptions, and summarised the messages. Fixed
+    some tests but they're still a WIP.
+
+ src/asgn2RollingStock/FreightCar.java   |  4 ++++
+ src/asgn2RollingStock/Locomotive.java   | 14 +++++++-------
+ src/asgn2RollingStock/PassengerCar.java | 10 +++++-----
+ src/asgn2Tests/RollingStockTests.java   | 14 +++++++++++++-
+ 4 files changed, 29 insertions(+), 13 deletions(-)
+
+commit 26d662318a788aa0e7357207df0fbdda493e52b3
+Author: Grant <Grant@172.19.2.159>
+Date:   Tue May 28 15:15:28 2013 +1000
+
+    Added more tests and cleaned up code in RollingStockTests, added
+    grossWeight exception to PassengerCar, will also add one to FreightCar
+
+ src/asgn2RollingStock/PassengerCar.java |  5 +++++
+ src/asgn2Tests/RollingStockTests.java   | 23 +++++++++++++++--------
+ 2 files changed, 20 insertions(+), 8 deletions(-)
+
+commit 773a70532ada6cb8ce0d7b6315ed15b3591d099d
+Author: Grant <Grant@172.19.2.159>
+Date:   Tue May 28 14:59:21 2013 +1000
+
+    Made first RollingStock test case, updated TrainException class.
+
+ src/asgn2Exceptions/TrainException.java |  2 +-
+ src/asgn2Tests/RollingStockTests.java   | 12 ++++++++----
+ 2 files changed, 9 insertions(+), 5 deletions(-)
+
+commit bbd3ed13ede53a8f5b4c58cfc258dac9194d2127
+Author: Steven Lomas <ldsiphons@hotmail.com>
+Date:   Tue May 28 13:52:56 2013 +1000
+
+    Updated
+    
+    Made DepartingTrain constuctor public. Stupidly forgot to make it
+    public, so now it can actually be called and the class used.
+    
+    GUI still not functional, but the code works without errors.
+
+ src/asgn2GUI/TrainGUI.java         | 90 ++++++++++++++++++++++++--------------
+ src/asgn2Train/DepartingTrain.java |  4 +-
+ 2 files changed, 59 insertions(+), 35 deletions(-)
+
+commit 696ec79d8ef6c31a4428a994315c6525fece9f10
+Author: Steven Lomas <ldsiphons@hotmail.com>
+Date:   Tue May 28 12:01:08 2013 +1000
+
+    fixed board() - handles boarding 0 passengers
+
+ src/asgn2RollingStock/PassengerCar.java | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 72f17d8824fb7298e692024d4d1b38e3c5fd3f63
+Author: Steven Lomas <ldsiphons@hotmail.com>
+Date:   Tue May 28 11:55:53 2013 +1000
+
+    Updated - commenting
+
+ src/asgn2RollingStock/Locomotive.java | 2 +-
+ src/asgn2Train/DepartingTrain.java    | 5 ++---
+ 2 files changed, 3 insertions(+), 4 deletions(-)
+
+commit a979ac53359db5a0b11f88f8e8ffd6aef2b4735b
+Author: Steven Lomas <ldsiphons@hotmail.com>
+Date:   Tue May 28 11:38:38 2013 +1000
+
+    Updated - addCarriage functionality
+    
+    addCarriage now (pseudo) checks for train configuration or passengers
+    before shunting train carriage to rear. Coded with the assumption that
+    carriages can ONLY be added using this function, otherwise...
+
+ src/asgn2Train/DepartingTrain.java | 63 ++++++++++++++++++++++++++++----------
+ 1 file changed, 47 insertions(+), 16 deletions(-)
+
+commit cfb6a4d49317840b816c7a1960c9831834b161ab
+Author: Steven Lomas <ldsiphons@hotmail.com>
+Date:   Mon May 27 23:57:00 2013 +1000
+
+    Submission accompaniments
+    
+    OurLogs will be a dump of the Git logs.
+    Statement is as described inside.
+
+ OurLogs.txt   |  6 ++++++
+ Statement.txt | 22 ++++++++++++++++++++++
+ 2 files changed, 28 insertions(+)
+
+commit aed500aa9d9c792be5baefd694df5a59ec9a87e3
+Author: Steven Lomas <ldsiphons@hotmail.com>
+Date:   Mon May 27 22:13:24 2013 +1000
+
+    Base GUI class
+    
+    Added base GUI class.
+    Does not yet have functionality.
+
+ src/asgn2GUI/TrainGUI.java         | 69 ++++++++++++++++++++++++++++++++++++++
+ src/asgn2Train/DepartingTrain.java |  5 +--
+ 2 files changed, 72 insertions(+), 2 deletions(-)
+
+commit b9e9470876f2463e9d8f78354d854bb3fc401d1b
+Author: Steven Lomas <ldsiphons@hotmail.com>
+Date:   Mon May 27 21:39:27 2013 +1000
+
+    Updated - added functionality
+    
+    Stupidly forgot to make the error class do anything.
+    
+    Fixed - should now properly hands errors to Java Exception class.
+    Fixed - Added author name.
+
+ src/asgn2Exceptions/TrainException.java | 1 +
+ 1 file changed, 1 insertion(+)
+
+commit dba5d3cad57a66db9e44ed4396e578c0e1498b16
+Author: Steven Lomas <ldsiphons@hotmail.com>
+Date:   Mon May 27 21:37:12 2013 +1000
+
+    Updated - added functionality
+    
+    Stupidly forgot to make the error class do anything.
+    
+    Fixed - now properly hands errors to Java Exception class.
+
+ src/asgn2Exceptions/TrainException.java | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+commit 3ff5c3eefe1fb9323518a6c7ce64c47f6fe70e4b
+Author: Steven Lomas <ldsiphons@hotmail.com>
+Date:   Mon May 27 21:28:13 2013 +1000
+
+    Further updated commenting and functionality
+    
+    Commenting still not fully formatted. Code is still brittle...
+    Redundant code still present in some methods.
+    Code should work, apart from issues listed below:
+    
+    Incomplete methods
+    ------------------
+    
+    DepartingTrain.java:
+    addCarriage (DOES NOT CHECK FOR CORRECT TRAIN ORDERING YET)
+    DepartingTrain (not sure how to 'construct' empty train, that's already
+    declared...)
+    (Various error checking throughout methods still incomplete)
+    
+    PassengerCar.java:
+    PassengerCar (error checking incomplete)
+    (Various error checking throughout methods still work in progess)
+    
+    FreightCar.java
+    FreightCar (error checking incomplete)
+    
+    RollingStock.java
+    RollingStock (error checking incomplete)
+    
+    Locomotive.java
+    (Various error checking throughout methods still incomplete)
+    (Redundant code needs to be removed and formatted to match JavaDoc)
+
+ src/asgn2RollingStock/Locomotive.java   |  9 ++++-----
+ src/asgn2RollingStock/PassengerCar.java |  8 ++++++++
+ src/asgn2Train/DepartingTrain.java      | 23 ++++++++++++++++++-----
+ 3 files changed, 30 insertions(+), 10 deletions(-)
+
+commit 0123be00044ae738b1a3fecc8d8c604cd23b083d
+Author: Steven Lomas <ldsiphons@hotmail.com>
+Date:   Mon May 27 20:58:42 2013 +1000
+
+    Formatting and code structure
+    
+    Revised some commenting and unified most code formatting.
+    
+    Incomplete methods
+    ------------------
+    
+    DepartingTrain.java:
+    addCarriage
+    
+    PassengerCar.java:
+    PassengerCar
+
+ src/asgn2Exceptions/TrainException.java | 13 ++++----
+ src/asgn2RollingStock/FreightCar.java   | 16 +++++-----
+ src/asgn2RollingStock/Locomotive.java   | 31 ++++++++++++++++---
+ src/asgn2RollingStock/PassengerCar.java | 33 +++++++++++++++++---
+ src/asgn2RollingStock/RollingStock.java | 54 ++++++++++++++++++---------------
+ src/asgn2Train/DepartingTrain.java      |  8 ++---
+ 6 files changed, 103 insertions(+), 52 deletions(-)
+
+commit 637d445a419950cb1622d3cf321515fa57339389
+Author: Steven Lomas <ldsiphons@hotmail.com>
+Date:   Mon May 27 20:26:11 2013 +1000
+
+    Small formatting updates
+    
+    PassengerCar.java & DepartingTrain.java still not fully functional.
+
+ src/asgn2Exceptions/TrainException.java | 14 ++---------
+ src/asgn2RollingStock/FreightCar.java   | 10 +-------
+ src/asgn2RollingStock/Locomotive.java   |  2 ++
+ src/asgn2RollingStock/PassengerCar.java | 44 ++++++++++++++++++++-------------
+ src/asgn2RollingStock/RollingStock.java |  8 ------
+ src/asgn2Train/DepartingTrain.java      |  7 ++----
+ 6 files changed, 34 insertions(+), 51 deletions(-)
+
+commit e3645998dc781fb8cc51cf8b3540bd17513f5984
+Author: Steven Lomas <ldsiphons@hotmail.com>
+Date:   Mon May 27 20:15:14 2013 +1000
+
+    Updated
+    
+    Nearing working prototype. Both incomplete classes still being worked
+    on.
+    PassengerCar.java still being constructed and formatted.
+    DepartingTrain.java Class not complete.
+
+ src/asgn2RollingStock/PassengerCar.java |  11 +++
+ src/asgn2Train/DepartingTrain.java      | 144 ++++++++++++++++++--------------
+ 2 files changed, 93 insertions(+), 62 deletions(-)
+
+commit 363678f730c7be4b4b407123655a9e978674db59
+Author: Steven Lomas <ldsiphons@hotmail.com>
+Date:   Mon May 27 19:12:34 2013 +1000
+
+    Updated
+    
+    Getting towards base functionality.
+    Not functional yet.
+
+ src/asgn2RollingStock/PassengerCar.java |  7 +--
+ src/asgn2Train/DepartingTrain.java      | 79 +++++++++++++++++++++++++++------
+ 2 files changed, 69 insertions(+), 17 deletions(-)
+
+commit 5adcb9c61ad380241798940d80e570d095a1f961
+Author: stevenlomas <ldsiphons@hotmail.com>
+Date:   Mon May 27 19:08:25 2013 +1000
+
+    Update Locomotive.java
+    
+    Getting core functionality working...
+
+ src/asgn2RollingStock/Locomotive.java | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit 45d6f5f1ac93edf9faca917b10e848990f1b7d6d
+Author: stevenlomas <ldsiphons@hotmail.com>
+Date:   Mon May 27 19:02:56 2013 +1000
+
+    Update RollingStock.java
+    
+    Getting functionality working.
+
+ src/asgn2RollingStock/RollingStock.java | 17 ++++++++---------
+ 1 file changed, 8 insertions(+), 9 deletions(-)
+
+commit 68c09d5596f0e7e09a80b3a41ca41444c25a0767
+Author: stevenlomas <ldsiphons@hotmail.com>
+Date:   Mon May 27 19:01:40 2013 +1000
+
+    Update FreightCar.java
+    
+    Getting functionality working.
+
+ src/asgn2RollingStock/FreightCar.java | 44 +++++++++++++++++++++--------------
+ 1 file changed, 26 insertions(+), 18 deletions(-)
+
+commit 19628313505e9b2ede382000a58eeef6acb9db46
+Author: stevenlomas <ldsiphons@hotmail.com>
+Date:   Mon May 27 19:00:51 2013 +1000
+
+    Update Locomotive.java
+    
+    Getting functionality working
+
+ src/asgn2RollingStock/Locomotive.java | 19 ++++++++++---------
+ 1 file changed, 10 insertions(+), 9 deletions(-)
+
+commit 8f0239d9e8e066d38d2b3606e847d645ffa4d66e
+Author: Grant O'Meara <Grantly93@hotmail.com>
+Date:   Mon May 27 17:57:07 2013 +1000
+
+    I believe I've completed Locomotive.java but I don't have anything to
+    run it with. I also cleaned up RollingStock.java.
+
+ src/asgn2RollingStock/FreightCar.java   |  1 -
+ src/asgn2RollingStock/Locomotive.java   | 58 ++++++++++++++++++++++++---------
+ src/asgn2RollingStock/RollingStock.java | 14 ++++----
+ 3 files changed, 50 insertions(+), 23 deletions(-)
+
+commit 3a4dab3b3b8a2d4579ad9f4aad1076bb9964e047
+Author: Grant O'Meara <Grantly93@hotmail.com>
+Date:   Mon May 27 16:11:44 2013 +1000
+
+    Added methods (no actual function though) to the test classes, taken
+    from the lessons learned images that give an idea on what they expect us
+    to test.
+
+ .classpath                            |   2 +
+ src/asgn2Tests/RollingStockTests.java | 143 +++++++++++++++++++++++++++++++---
+ src/asgn2Tests/TrainTests.java        | 143 +++++++++++++++++++++++++++++++---
+ 3 files changed, 266 insertions(+), 22 deletions(-)
+
+commit 1bcd1dc7e23075092337d7f1563ca594e233b010
+Author: Steven Lomas <ldsiphons@hotmail.com>
+Date:   Fri May 24 19:47:19 2013 +1000
+
+    updated
+    
+    Some small additions made
+
+ src/asgn2RollingStock/PassengerCar.java |  18 ++++-
+ src/asgn2RollingStock/RollingStock.java |  14 ++--
+ src/asgn2Train/DepartingTrain.java      | 126 ++++++++++++++++++++++++++------
+ 3 files changed, 127 insertions(+), 31 deletions(-)
+
+commit 5803895c6d9cf6868880467543379824e1f3971c
+Author: Grant <Grant@172.19.16.26>
+Date:   Fri May 24 13:03:01 2013 +1000
+
+    Added some code to Locomotive.java and RollingStock.java, as I'm pretty
+    desperate to get started on this even though thats your role. You're
+    welcome to delete any of my code if it doesn't suit your solution.
+
+ src/asgn2RollingStock/Locomotive.java   | 24 ++++++++++++++----------
+ src/asgn2RollingStock/RollingStock.java | 16 +++++++++++-----
+ src/asgn2Tests/RollingStockTests.java   |  5 +++++
+ src/asgn2Tests/TrainTests.java          |  5 +++++
+ 4 files changed, 35 insertions(+), 15 deletions(-)
+
+commit b406c280f73de2950d2968b7b845d1c3dcdc538c
+Author: Grant <Grant@172.19.16.26>
+Date:   Fri May 24 11:38:33 2013 +1000
+
+    Added code structure to the classes in the asgn2Exceptions and
+    asgn2RollingStock packages. There are a lot of comments in
+    TrainException, RollingStock and Freight car taken straight from the API
+    documentation, these can probably be removed as I only started adding
+    them for convenience.
+
+ src/asgn2Exceptions/TrainException.java | 19 +++++++++--
+ src/asgn2RollingStock/FreightCar.java   | 55 ++++++++++++++++++++++++++++++
+ src/asgn2RollingStock/Locomotive.java   | 35 +++++++++++++++++++
+ src/asgn2RollingStock/PassengerCar.java | 48 ++++++++++++++++++++++++++
+ src/asgn2RollingStock/RollingStock.java | 60 +++++++++++++++++++++++++++++++++
+ 5 files changed, 214 insertions(+), 3 deletions(-)
+
+commit 7fc8cafcbe0014c3f178be9be2e2e8ec2e5a559c
+Author: Grant <Grant@172.19.16.26>
+Date:   Fri May 24 10:29:23 2013 +1000
+
+    Added testing package and classes
+
+ src/asgn2Tests/RollingStockTests.java | 17 +++++++++++++++++
+ src/asgn2Tests/TrainTests.java        | 17 +++++++++++++++++
+ 2 files changed, 34 insertions(+)
+
+commit 1e83e3dc971e399a4b0b3a1c6c8ead6a60b25065
+Author: Grant <Grant@172.19.16.26>
+Date:   Fri May 24 10:26:02 2013 +1000
+
+    Added exception class and package
+
+ src/asgn2Exceptions/TrainException.java | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+
+commit afce22f5eb6aa99627a9952ba928510c10e1ef24
+Author: GrantOM <Grantly93@hotmail.com>
+Date:   Fri May 24 10:17:22 2013 +1000
+
+    Added my student no.
+
+ README.md | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 2051fb870cee3c9c6375e32027396d134a73f116
+Author: stevenlomas <ldsiphons@hotmail.com>
+Date:   Thu May 23 17:46:14 2013 +1000
+
+    Update README.md
+
+ README.md | 16 +++++++---------
+ 1 file changed, 7 insertions(+), 9 deletions(-)
+
+commit fc5862b5d51b56d39747943e1de128b9d85e11c3
+Author: stevenlomas <ldsiphons@hotmail.com>
+Date:   Thu May 23 16:11:19 2013 +1000
+
+    Added authors
+
+ src/asgn2Train/DepartingTrain.java | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+commit 942b935af12d542d00cf515a104492946db6b8b4
+Author: Grant <Grant@172.19.16.26>
+Date:   Thu May 23 16:00:55 2013 +1000
+
+    test message
+
+ src/asgn2Train/DepartingTrain.java | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+commit 7f459ac7421608a31a6077a3ac018b37fa3d0bf0
+Author: stevenlomas <ldsiphons@hotmail.com>
+Date:   Thu May 23 15:28:11 2013 +1000
+
+    Testing web commit
+
+ src/asgn2Train/DepartingTrain.java | 2 ++
+ 1 file changed, 2 insertions(+)
+
+commit 9e35579afad323930d0647158211e0bae5eaea0e
+Author: stevenlomas <ldsiphons@hotmail.com>
+Date:   Thu May 23 15:06:24 2013 +1000
+
+    Readme
+
+ README.md | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+commit b62cdbd1ea0d5a5d3dcfce68b8ae4520d5de3994
+Author: stevenlomas <ldsiphons@hotmail.com>
+Date:   Thu May 23 14:59:28 2013 +1000
+
+    Merged from local
+    
+    Merged changes manually
+
+ src/asgn2Train/DepartingTrain.java | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+
+commit 4077865eca830533ec0d4aa730ef845b1e359cd6
+Author: stevenlomas <ldsiphons@hotmail.com>
+Date:   Thu May 23 14:45:46 2013 +1000
+
+    Testing merge
+    
+    test
+
+ src/asgn2Train/DepartingTrain.java | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+commit da12bc73e8f74141133e86c385ec3e57446b4987
+Author: stevenlomas <ldsiphons@hotmail.com>
+Date:   Thu May 23 14:28:32 2013 +1000
+
+    Testing web interface
+    
+    Added public methods numberOnBoard and numberOfSeats, which return the total number of passengers and seats on board all cars in the train, retrospectively.
+
+ src/asgn2Train/DepartingTrain.java | 26 ++++++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
+
+commit e41bbca5da99c99da5342f7ad4a25140d12923ba
+Author: Steven Lomas <ldsiphons@hotmail.com>
+Date:   Thu May 23 14:17:18 2013 +1000
+
+    Departing Train
+    
+    Added functions firstCarriage and nextCarriage, which both return a
+    RollingStock object
+
+ src/asgn2Train/DepartingTrain.java | 25 ++++++++++++++++++++++---
+ 1 file changed, 22 insertions(+), 3 deletions(-)
+
+commit e3b3f46ac0719d6243cd0ef72639954ddd7b7d10
+Author: Steven Lomas <ldsiphons@hotmail.com>
+Date:   Thu May 23 14:00:09 2013 +1000
+
+    Rolling stock
+    
+    Initial commit test
+
+ src/asgn2RollingStock/FreightCar.java   | 0
+ src/asgn2RollingStock/Locomotive.java   | 0
+ src/asgn2RollingStock/PassengerCar.java | 0
+ src/asgn2RollingStock/RollingStock.java | 0
+ 4 files changed, 0 insertions(+), 0 deletions(-)
+
+commit c9ff293fab1b52d67444e77926db6fad515d7120
+Author: Steven Lomas <ldsiphons@hotmail.com>
+Date:   Wed May 22 12:41:26 2013 +1000
+
+    Commit 1, test
+
+ src/asgn2Train/DepartingTrain.java | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+
+commit bd5411711b31259a617930fd4d5ecdf9ce2f5449
+Author: Steven Lomas <ldsiphons@hotmail.com>
+Date:   Wed May 22 12:33:21 2013 +1000
+
+    Initial project commit, containing javadoc documentation
+
+ .classpath                                        |   6 +
+ .gitignore                                        |   1 +
+ .project                                          |  17 +
+ doc/allclasses-frame.html                         |  41 ++
+ doc/allclasses-noframe.html                       |  41 ++
+ doc/asgn2Exceptions/TrainException.html           | 255 ++++++++++
+ doc/asgn2Exceptions/class-use/TrainException.html | 273 +++++++++++
+ doc/asgn2Exceptions/package-frame.html            |  32 ++
+ doc/asgn2Exceptions/package-summary.html          | 158 +++++++
+ doc/asgn2Exceptions/package-tree.html             | 158 +++++++
+ doc/asgn2Exceptions/package-use.html              | 191 ++++++++
+ doc/asgn2RollingStock/FreightCar.html             | 324 +++++++++++++
+ doc/asgn2RollingStock/Locomotive.html             | 354 ++++++++++++++
+ doc/asgn2RollingStock/PassengerCar.html           | 402 ++++++++++++++++
+ doc/asgn2RollingStock/RollingStock.html           | 336 +++++++++++++
+ doc/asgn2RollingStock/class-use/FreightCar.html   | 144 ++++++
+ doc/asgn2RollingStock/class-use/Locomotive.html   | 144 ++++++
+ doc/asgn2RollingStock/class-use/PassengerCar.html | 144 ++++++
+ doc/asgn2RollingStock/class-use/RollingStock.html | 254 ++++++++++
+ doc/asgn2RollingStock/package-frame.html          |  38 ++
+ doc/asgn2RollingStock/package-summary.html        | 172 +++++++
+ doc/asgn2RollingStock/package-tree.html           | 155 ++++++
+ doc/asgn2RollingStock/package-use.html            | 191 ++++++++
+ doc/asgn2Train/DepartingTrain.html                | 553 ++++++++++++++++++++++
+ doc/asgn2Train/class-use/DepartingTrain.html      | 144 ++++++
+ doc/asgn2Train/package-frame.html                 |  32 ++
+ doc/asgn2Train/package-summary.html               | 158 +++++++
+ doc/asgn2Train/package-tree.html                  | 153 ++++++
+ doc/asgn2Train/package-use.html                   | 144 ++++++
+ doc/constant-values.html                          | 146 ++++++
+ doc/deprecated-list.html                          | 146 ++++++
+ doc/help-doc.html                                 | 223 +++++++++
+ doc/index-files/index-1.html                      | 148 ++++++
+ doc/index-files/index-10.html                     | 167 +++++++
+ doc/index-files/index-2.html                      | 150 ++++++
+ doc/index-files/index-3.html                      | 147 ++++++
+ doc/index-files/index-4.html                      | 149 ++++++
+ doc/index-files/index-5.html                      | 148 ++++++
+ doc/index-files/index-6.html                      | 147 ++++++
+ doc/index-files/index-7.html                      | 162 +++++++
+ doc/index-files/index-8.html                      | 151 ++++++
+ doc/index-files/index-9.html                      | 150 ++++++
+ doc/index.html                                    |  39 ++
+ doc/overview-frame.html                           |  46 ++
+ doc/overview-summary.html                         | 159 +++++++
+ doc/overview-tree.html                            | 159 +++++++
+ doc/package-list                                  |   3 +
+ doc/resources/inherit.gif                         | Bin 0 -> 57 bytes
+ doc/serialized-form.html                          | 163 +++++++
+ doc/stylesheet.css                                |  29 ++
+ 50 files changed, 7647 insertions(+)

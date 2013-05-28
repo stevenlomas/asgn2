@@ -75,9 +75,8 @@ public class Locomotive extends RollingStock {
 	 * 
 	 * @return the locomotive's "pulling power" in tonnes
 	 */
-	public int power() {
-		int pullingPower = locoPower - this.getGrossWeight();
-		return pullingPower;
+	public int power() {;
+		return locoPower;
 	}
 
 	/**

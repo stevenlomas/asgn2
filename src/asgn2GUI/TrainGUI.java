@@ -254,43 +254,133 @@ public class TrainGUI extends JFrame implements ActionListener {
 			Component source = (Component)event.getSource();
 			
 			if (source == addLocomotiveChoice) { // Add Locomotive
-				try {
-					Train.addCarriage(new Locomotive(90, "5S"));
-				} catch (TrainException e1) {
-					errorHandler(e1);
-				}
+				addLocomotive();
 			} else if (source == addPassengerCarChoice) { // Add Passenger Car
-				try {
-					Train.addCarriage(new PassengerCar(50, 50));
-				} catch (TrainException e2) {
-					errorHandler(e2);
-				}
+				addPassengerCarriage();
 			} else if (source == addFreightCarChoice) { // Add Freight
-				try {
-					Train.addCarriage(new FreightCar(40, "G"));
-				} catch (TrainException e3) {
-					errorHandler(e3);
-				}
+				addFreight();
 			} else if (source == addPassengersChoice) { // Board Passengers
-				try {
-					int overflow = Train.board(10);
-					if (overflow > 0) { // Cannot fit all passengers
-						JOptionPane.showMessageDialog(null, overflow +
-								" passengers were unable to find a seat.",
-								"No Free Seats Left", JOptionPane.INFORMATION_MESSAGE);
-					}
-				} catch (TrainException e4) {
-					errorHandler(e4);
+				int overflow = addPassengers();
+				if (overflow > 0) { // Cannot fit all passengers
+					JOptionPane.showMessageDialog(null, overflow +
+							" passengers were unable to find a seat.",
+							"No Free Seats Left", JOptionPane.INFORMATION_MESSAGE);
 				}
 			} else if (source == removeCarriageChoice) { // Remove Locomotive
 				try {
 					Train.removeCarriage();
-				} catch (TrainException e5) {
-					errorHandler(e5);
+				} catch (TrainException e) {
+					errorHandler(e);
 				}
 			}
 			
 			updateInformation();
+		}
+		
+		private void addLocomotive() {
+			int weight = 90;
+			Object[] enginePower = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+			Object[] engineType = { "Diesel", "Steam", "Eletric" };
+			
+			/* String engine = (String)JOptionPane.showInputDialog(null,
+					"Choose the type of engine.", "Engine Type",
+					JOptionPane.INFORMATION_MESSAGE, null,
+					engineType, engineType[0]); */
+			
+			String power = (String)JOptionPane.showInputDialog(null,
+					"Choose the engine power.", "Engine Power",
+					JOptionPane.INFORMATION_MESSAGE, null,
+					enginePower, enginePower[0]);
+			
+			String engine = (String)JOptionPane.showInputDialog(null,
+					"Choose the type of engine.", "Engine Type",
+					JOptionPane.INFORMATION_MESSAGE, null,
+					engineType, engineType[0]);
+			
+			switch (engine) {
+	        case "Diesel"	: engine = "D";
+	        	break;
+	        case "Steam"	: engine = "S";
+         		break;
+	        case "Eletric"	: engine = "E";
+	        	break;           
+			}
+			
+			try {
+				Train.addCarriage(new Locomotive(weight, power + engine));
+			} catch (TrainException e) {
+				errorHandler(e);
+			}
+		}
+		
+		private void addPassengerCarriage() {
+			int weight = 50;
+			int seats = 50;
+			
+			/* weight = (Int)JOptionPane.showInputDialog(null,
+					"Choose the type of engine.", "Engine Type",
+					JOptionPane.INFORMATION_MESSAGE, null,
+					engineType, engineType[0]); */
+			
+			/* seats = (Int)JOptionPane.showInputDialog(null,
+			"Choose the type of engine.", "Engine Type",
+			JOptionPane.INFORMATION_MESSAGE, null,
+			engineType, engineType[0]); */
+			
+			try {
+				Train.addCarriage(new PassengerCar(weight, seats));
+			} catch (TrainException e) {
+				errorHandler(e);
+			}
+		}
+		
+		private void addFreight() {
+			int weight = 40;
+			Object[] goodsType = { "General Goods", "Refrigerated Goods",
+					"Dangerous Materials" };
+			
+			/* weight = (String)JOptionPane.showInputDialog(null,
+					"Choose the type of engine.", "Engine Type",
+					JOptionPane.INFORMATION_MESSAGE, null,
+					engineType, engineType[0]); */
+			
+			String goods = (String)JOptionPane.showInputDialog(null,
+					"Choose the type of goods this\n Freight Carriage will carry.",
+					"Goods Type", JOptionPane.INFORMATION_MESSAGE, null,
+					goodsType, goodsType[0]);
+			
+			switch (goods) {
+	        case "General Goods"		: goods = "G";
+	        	break;
+	        case "Refrigerated Goods"	: goods = "R";
+         		break;
+	        case "Dangerous Materials"	: goods = "D";
+	        	break;           
+			}
+			
+			try {
+				Train.addCarriage(new FreightCar(weight,  goods));
+			} catch (TrainException e) {
+				errorHandler(e);
+			}
+		}
+		
+		private int addPassengers() {
+			int passengers = 10;
+			int overflow = 0;
+						
+			/* String engine = (String)JOptionPane.showInputDialog(null,
+					"Choose the type of engine.", "Engine Type",
+					JOptionPane.INFORMATION_MESSAGE, null,
+					engineType, engineType[0]); */
+			
+			try {
+				overflow = Train.board(passengers);
+			} catch (TrainException e1) {
+				errorHandler(e1);
+			}
+			
+			return overflow;
 		}
 		
 		private void errorHandler(TrainException e) {

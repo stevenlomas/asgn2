@@ -18,9 +18,6 @@ public class DepartingTrain extends Object {
 	 */
 	public DepartingTrain() {
 		iterator = 0;
-		
-		// OLD - this.nextCar = new PassengerCar(50, 24);
-		// OLD - this.firstCar = new Locomotive(100, "6D");
 	}
 
 	/**

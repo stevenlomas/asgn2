@@ -21,6 +21,12 @@ public class RollingStockTests {
 	public static final int PASSENGER_SEATS = 5;
 	public static final String FREIGHT_TYPE = "G";
 	
+	
+	@Test
+	public void testConstructorWithValidWeight() throws TrainException{
+		testRollingStock = new Locomotive(LOCO_WEIGHT, LOCO_CLASS);
+		assertTrue(LOCO_WEIGHT == testRollingStock.getGrossWeight());
+	}
 	/**
 	 * A constant of value zero is used to test that an invalid gross
 	 * weight of a locomotive throws an exception, as zero is not a valid
@@ -29,7 +35,7 @@ public class RollingStockTests {
 	 * @throws TrainException
 	 */
 	@Test (expected = TrainException.class)
-	public void invalidGrossWeightLoco() throws TrainException {
+	public void testLocoConstructorWithInvalidWeight() throws TrainException {
 		testRollingStock = new Locomotive(ZERO, LOCO_CLASS);
 	}
 	
@@ -41,7 +47,7 @@ public class RollingStockTests {
 	 * @throws TrainException
 	 */
 	@Test (expected = TrainException.class)
-	public void invalidGrossWeightPassenger() throws TrainException {	
+	public void testPassengerConstructorWithInvalidWeight() throws TrainException {	
 		testRollingStock = new PassengerCar(ZERO, PASSENGER_SEATS);
 	}
 	
@@ -52,7 +58,7 @@ public class RollingStockTests {
 	 * @throws TrainException
 	 */	
 	@Test (expected = TrainException.class)
-	public void invalidGrossWeightFreight() throws TrainException {	
+	public void testFreightConstructorWithInvalidWeight() throws TrainException {	
 		testRollingStock = new FreightCar(ZERO, FREIGHT_TYPE);		
 	}
 	
@@ -63,7 +69,7 @@ public class RollingStockTests {
 	 * @throws TrainException
 	 */
 	@Test (expected = TrainException.class)
-	public void invalidLocomotivePower() throws TrainException {
+	public void testInvalidLocomotivePower() throws TrainException {
 		String invalidPower = "0E";
 		testRollingStock = new Locomotive(LOCO_WEIGHT, invalidPower);
 	}
@@ -76,7 +82,7 @@ public class RollingStockTests {
 	 * @throws TrainException
 	 */
 	@Test (expected = TrainException.class)
-	public void invalidLocomotiveType() throws TrainException {
+	public void testInvalidLocomotiveType() throws TrainException {
 		String invalidType = "1A";
 		testRollingStock = new Locomotive(LOCO_WEIGHT, invalidType);
 	}
@@ -88,7 +94,7 @@ public class RollingStockTests {
 	 * @throws TrainException
 	 */
 	@Test (expected = TrainException.class)
-	public void invalidNumberAlightingNegative() throws TrainException {
+	public void testInvalidNumberAlightingNegative() throws TrainException {
 		int numAlighting = -1, passengers = 5;
 		testRollingStock = new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS);
 		((PassengerCar)testRollingStock).board(passengers);
@@ -103,11 +109,25 @@ public class RollingStockTests {
 	 * @throws TrainException
 	 */
 	@Test (expected = TrainException.class)
-	public void invalidNumberAlightingTooMany() throws TrainException {
+	public void testInvalidNumberAlightingTooMany() throws TrainException {
 		int numAlighting = 6, passengers = 5;
 		testRollingStock = new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS);
 		((PassengerCar)testRollingStock).board(passengers);
 		((PassengerCar)testRollingStock).alight(numAlighting);
+	}
+	
+	/**
+	 * Boundary case - tests for more people boarding than there
+	 * are seats, which does not throw an exception but instead
+	 * only boards as many people as there are free seats.
+	 * 
+	 * @throws TrainException
+	 */
+	@Test
+	public void testTooManyBoarding() throws TrainException {
+		int passengers = 50;
+		testRollingStock = new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS);
+		((PassengerCar)testRollingStock).board(passengers);
 	}
 	
 	/**
@@ -117,7 +137,7 @@ public class RollingStockTests {
 	 * @throws TrainException
 	 */
 	@Test (expected = TrainException.class)
-	public void invalidNumberBoarding() throws TrainException {
+	public void testInvalidNumberBoarding() throws TrainException {
 		int passengers = -1;
 		testRollingStock = new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS);
 		((PassengerCar)testRollingStock).board(passengers);
@@ -130,7 +150,7 @@ public class RollingStockTests {
 	 * @throws TrainException
 	 */
 	@Test (expected = TrainException.class)
-	public void invalidNumberOfSeats() throws TrainException {
+	public void testInvalidNumberOfSeats() throws TrainException {
 		int numSeats = -1;
 		testRollingStock = new PassengerCar(PASSENGER_WEIGHT, numSeats);
 	}
@@ -149,10 +169,44 @@ public class RollingStockTests {
 	 * @throws TrainException
 	 */
 	@Test 
-	public void locomotivePrintsCorrectly() throws TrainException{
+	public void testLocomotivePrintsCorrectly() throws TrainException{
 		String locoClass = "5D";
 		testRollingStock = new Locomotive(LOCO_WEIGHT, locoClass);
 		assertEquals(((Locomotive)testRollingStock).toString(), "Loco(5D)");		
+	}
+	
+	/**
+	 * Normal case - tests that the toString method for the passengerCar
+	 * returns correctly. This is done by running the code correctly and
+	 * predicting the results.
+	 * 
+	 * @throws TrainException
+	 */
+	@Test
+	public void testPassengerCarPrintsCorrectly() throws TrainException {
+		int numAlighting = 2, passengers = 5, expectedPassengers = 3;
+		testRollingStock = new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS);
+		((PassengerCar)testRollingStock).board(passengers);
+		((PassengerCar)testRollingStock).alight(numAlighting);
+		String carriageString = ((PassengerCar)testRollingStock).toString();
+		assertEquals(carriageString, "Passenger(" + 
+				expectedPassengers + "/" + PASSENGER_SEATS + ")");
+	}
+	
+	/**
+	 * Normal case - tests that the toString method for the passengerCar
+	 * returns correctly. This is done by running the code correctly and
+	 * predicting the results.
+	 * 
+	 * 
+	 * @throws TrainException
+	 **/
+	@Test
+	public void testFreightCarPrintsCorrectly() throws TrainException {
+		//int numAlighting = 2, passengers = 5, expectedPassengers = 3;
+		testRollingStock = new FreightCar(FREIGHT_WEIGHT, FREIGHT_TYPE);
+		String freightString = ((FreightCar)testRollingStock).toString();
+		assertEquals(freightString, "Freight(" + FREIGHT_TYPE+ ")");
 	}
 	
 	/**
@@ -162,7 +216,7 @@ public class RollingStockTests {
 	 * @throws TrainException
 	 */
 	@Test
-	public void nobodyGetsOff() throws TrainException {
+	public void testNobodyGetsOff() throws TrainException {
 		int numAlighting = 0, passengers = 5, onBoard;
 		testRollingStock = new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS);
 		((PassengerCar)testRollingStock).board(passengers);
@@ -178,7 +232,7 @@ public class RollingStockTests {
 	 * @throws TrainException
 	 */
 	@Test
-	public void nobodyGetsOn() throws TrainException {
+	public void testNobodyGetsOn() throws TrainException {
 		//onBoard is set to 1 to prove that the code performs as expected
 		int passengers = 0;
 		testRollingStock = new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS);
@@ -194,7 +248,7 @@ public class RollingStockTests {
 	 * @throws TrainException
 	 */
 	@Test
-	public void noSeatsAllowed() throws TrainException {
+	public void testNoSeatsAllowed() throws TrainException {
 		int numSeats = 0, expected = 0;
 		testRollingStock = new PassengerCar(PASSENGER_WEIGHT, numSeats);
 		assertEquals(((PassengerCar)testRollingStock).numberOfSeats(), expected);
@@ -207,29 +261,11 @@ public class RollingStockTests {
 	 * @throws TrainException
 	 */
 	@Test
-	public void numberOfSeatsRemembered() throws TrainException {
+	public void testNumberOfSeatsRemembered() throws TrainException {
 		int expectedSeats = 5;
 		testRollingStock = new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS);
 		int numSeats = ((PassengerCar)testRollingStock).numberOfSeats();
 		assertEquals(numSeats, expectedSeats);
-	}
-	
-	/**
-	 * Normal case - tests that the toString method for the passengerCar
-	 * returns correctly. This is done by running the code correctly and
-	 * predicting the results.
-	 * 
-	 * @throws TrainException
-	 */
-	@Test
-	public void passengerCarPrintsCorrectly() throws TrainException {
-		int numAlighting = 2, passengers = 5, expectedPassengers = 3;
-		testRollingStock = new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS);
-		((PassengerCar)testRollingStock).board(passengers);
-		((PassengerCar)testRollingStock).alight(numAlighting);
-		String carriageString = ((PassengerCar)testRollingStock).toString();
-		assertEquals(carriageString, "Passenger(" + 
-				expectedPassengers + "/" + PASSENGER_SEATS + ")");
 	}
 	
 	/**
@@ -241,7 +277,7 @@ public class RollingStockTests {
 	 * @throws TrainException
 	 */
 	@Test
-	public void passengersAccumulate() throws TrainException {
+	public void testPassengersAccumulate() throws TrainException {
 		int passengers = 2, expectedPassengers = 4;
 		testRollingStock = new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS);
 		//board two lots of 2 passengers
@@ -259,7 +295,7 @@ public class RollingStockTests {
 	 * @throws TrainException
 	 */
 	@Test
-	public void passengersCanAlight() throws TrainException {
+	public void testPassengersCanAlight() throws TrainException {
 		int numAlighting = 2, passengers = 5, expectedPassengers = 3;
 		testRollingStock = new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS);
 		((PassengerCar)testRollingStock).board(passengers);
@@ -276,10 +312,10 @@ public class RollingStockTests {
 	 * @throws TrainException
 	 */
 	@Test
-	public void powerCalculatedCorrectly() throws TrainException {
+	public void testPowerCalculatedCorrectly() throws TrainException {
 		//for simplicity I assigned the locomotive power to a variable
 		int locoWeight = 120, locoPower = 7;
-		int expectedPower = ((locoPower * 100) - locoWeight);
+		int expectedPower = ((locoPower * 100));
 		String locoClass = "7S";
 		testRollingStock = new Locomotive(locoWeight, locoClass);
 		int pullingPower = ((Locomotive)testRollingStock).power();
@@ -295,7 +331,7 @@ public class RollingStockTests {
 	 * @throws TrainException
 	 */
 	@Test (expected = TrainException.class)
-	public void tooManyAlighting() throws TrainException {
+	public void testTooManyAlighting() throws TrainException {
 		int numAlighting = 5, passengers = 4;
 		testRollingStock = new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS);
 		((PassengerCar)testRollingStock).board(passengers);
@@ -309,7 +345,7 @@ public class RollingStockTests {
 	 * @throws TrainException
 	 */
 	@Test
-	public void validFreightCarTypes() throws TrainException {
+	public void testTalidFreightCarTypes() throws TrainException {
 		String freightType = "G";
 		testRollingStock = new FreightCar(FREIGHT_WEIGHT, freightType);
 		String actualType = ((FreightCar)testRollingStock).toString();
@@ -323,7 +359,7 @@ public class RollingStockTests {
 	 * @throws TrainException
 	 */
 	@Test
-	public void validLocomotiveCodes() throws TrainException {
+	public void testTalidLocomotiveCodes() throws TrainException {
 		String locoClass = "5D";
 		testRollingStock = new Locomotive(LOCO_WEIGHT, locoClass);
 		String actualClass = ((Locomotive)testRollingStock).toString();

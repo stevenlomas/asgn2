@@ -22,8 +22,8 @@ public class TrainTests {
 	private DepartingTrain testTrain = new DepartingTrain();
 	
 	/**
-	 * Normal case - test case that creates a valid train without
-	 * errors.
+	 * Normal case - test case that creates a valid carriages (and train)
+	 * without any errors.
 	 * 
 	 * @throws TrainException
 	 */
@@ -38,16 +38,39 @@ public class TrainTests {
 	}
 	
 	/**
+	 * Normal case - test case that creates 2 different valid carriages 
+	 * (and trains) without any errors, as well as testing that they 
+	 * do not have the same carriages.
+	 * 
+	 * @throws TrainException
+	 */
+	@Test
+	public void assembleTwoValidTrains() throws TrainException {
+		DepartingTrain testTrain2 = new DepartingTrain();
+		RollingStock loco = new Locomotive(LOCO_WEIGHT, LOCO_CLASS);
+		RollingStock passenger = new PassengerCar(PASSENGER_WEIGHT, SEATS);
+		RollingStock freight = new FreightCar(FREIGHT_WEIGHT, FREIGHT_TYPE);
+		testTrain.addCarriage(loco);
+		testTrain2.addCarriage(loco);
+		testTrain.addCarriage(passenger);
+		testTrain2.addCarriage(passenger);
+		testTrain.addCarriage(freight);
+		testTrain2.addCarriage(passenger);
+		assertTrue(testTrain != testTrain2);
+	}
+
+	
+	/**
 	 * Boundary case - tests that null is returned if nextCarriage() is 
 	 * called when there are no more carriages to be iterated.
 	 * 
 	 * @throws TrainException
 	 */
 	@Test
-	public void cantIterateThroughCarriages() throws TrainException {
+	public void testIteratingThroughTooManyCarriages() throws TrainException {
 		RollingStock loco = new Locomotive(LOCO_WEIGHT, LOCO_CLASS);
-		RollingStock passenger1 = new PassengerCar(PASSENGER_WEIGHT, 10);
-		RollingStock freight = new FreightCar(FREIGHT_WEIGHT, "G");
+		RollingStock passenger1 = new PassengerCar(PASSENGER_WEIGHT, SEATS);
+		RollingStock freight = new FreightCar(FREIGHT_WEIGHT, FREIGHT_TYPE);
 		testTrain.addCarriage(loco);
 		testTrain.addCarriage(passenger1);
 		testTrain.addCarriage(freight);
@@ -71,6 +94,21 @@ public class TrainTests {
 		testTrain.addCarriage(loco);
 		testTrain.addCarriage(freight);
 		testTrain.addCarriage(passenger);
+	}
+	
+	/**
+	 * Normal case - tests that adding passengers when there is no
+	 * passenger car adds 0 passengers to the train
+	 * 
+	 * @throws TrainException
+	 */
+	@Test 
+	public void testBoardWithoutPassengerCar() throws TrainException {
+		int expectedPassengers = 0;
+		RollingStock loco = new Locomotive(LOCO_WEIGHT, LOCO_CLASS);
+		testTrain.addCarriage(loco);
+		testTrain.board(3);
+		assertEquals(testTrain.numberOnBoard(), expectedPassengers);
 	}
 	
 	/**
@@ -111,7 +149,7 @@ public class TrainTests {
 	 * @throws TrainException
 	 */
 	@Test (expected = TrainException.class)
-	public void noShuntingWithPassengers() throws TrainException {
+	public void testShuntingWithPassengers() throws TrainException {
 		int numPassengers = 5;
 		RollingStock loco = new Locomotive(LOCO_WEIGHT, LOCO_CLASS);
 		RollingStock passenger = new PassengerCar(PASSENGER_WEIGHT, SEATS);
@@ -119,6 +157,41 @@ public class TrainTests {
 		testTrain.addCarriage(passenger);
 		testTrain.board(numPassengers);
 		testTrain.addCarriage(passenger);
+	}
+	
+	/**
+	 * Exceptional case - tests that trying to remove a carriage
+	 * with people still on board will throw an exception.
+	 */
+	@Test (expected = TrainException.class)
+	public void testRemoveCarriageWithPassengers() throws TrainException {
+		int numPassengers = 5;
+		RollingStock loco = new Locomotive(LOCO_WEIGHT, LOCO_CLASS);
+		RollingStock passenger = new PassengerCar(PASSENGER_WEIGHT, SEATS);
+		testTrain.addCarriage(loco);
+		testTrain.addCarriage(passenger);
+		testTrain.board(numPassengers);
+		testTrain.removeCarriage();
+	}
+	
+	/**
+	 * Exceptional case - tests than an exception is thrown when
+	 * the user tries to remove a carriage when there are none left.
+	 * 
+	 * @throws TrainException
+	 */
+	@Test (expected = TrainException.class)
+	public void testRemovingTooManyCarriages() throws TrainException {
+		RollingStock loco = new Locomotive(LOCO_WEIGHT, LOCO_CLASS);
+		RollingStock passenger = new PassengerCar(PASSENGER_WEIGHT, SEATS);
+		RollingStock freight = new FreightCar(FREIGHT_WEIGHT, FREIGHT_TYPE);
+		testTrain.addCarriage(loco);
+		testTrain.addCarriage(passenger);
+		testTrain.addCarriage(freight);
+		testTrain.removeCarriage();
+		testTrain.removeCarriage();
+		testTrain.removeCarriage();
+		testTrain.removeCarriage();
 	}
 	
 	/**
@@ -190,25 +263,7 @@ public class TrainTests {
 		assertFalse(testTrain.nextCarriage() == freight);
 	}
 	
-	/**
-	 * Exceptional case - tests than an exception is thrown when
-	 * the user tries to remove a train when there are none left.
-	 * 
-	 * @throws TrainException
-	 */
-	@Test (expected = TrainException.class)
-	public void removeTooMany() throws TrainException {
-		RollingStock loco = new Locomotive(LOCO_WEIGHT, LOCO_CLASS);
-		RollingStock passenger = new PassengerCar(PASSENGER_WEIGHT, SEATS);
-		RollingStock freight = new FreightCar(FREIGHT_WEIGHT, FREIGHT_TYPE);
-		testTrain.addCarriage(loco);
-		testTrain.addCarriage(passenger);
-		testTrain.addCarriage(freight);
-		testTrain.removeCarriage();
-		testTrain.removeCarriage();
-		testTrain.removeCarriage();
-		testTrain.removeCarriage();
-	}
+
 	
 	/**
 	 * Boundary case - This test tries to add 50 passengers into a 10 seat
@@ -248,13 +303,13 @@ public class TrainTests {
 	/**
 	 * Boundary case - tests that a train that has a gross weight
 	 * equal to its pulling power, returns false when trainCanMove()
-	 * is called.
+	 * is called (therefore it can't move).
 	 * 
 	 * @throws TrainException
 	 */
 	@Test
 	public void trainExactlyFull() throws TrainException {
-		int locoWeight = 200, passengerWeight = 300;
+		int locoWeight = 200, passengerWeight = 400;
 		RollingStock loco = new Locomotive(locoWeight, LOCO_CLASS);
 		RollingStock passenger = new PassengerCar(passengerWeight, SEATS);
 		testTrain.addCarriage(loco);

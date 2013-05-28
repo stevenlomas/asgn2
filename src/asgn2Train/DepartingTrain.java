@@ -156,7 +156,7 @@ public class DepartingTrain extends Object {
 				return false;
 			}
 		} else {
-			// First object not Locomotive. Train incorrectly configured?
+			// First Carriage not Locomotive. Train incorrectly configured?
 			return true;
 		}
 	}
@@ -176,15 +176,48 @@ public class DepartingTrain extends Object {
 	 */
 	public void addCarriage(RollingStock newCarriage)
 			throws TrainException {
-		// Iff Carriage is FreightCar
-		train.addElement(newCarriage); // Push newCarriage to back of train
 		
-		
-		// Throw error if trying to shunt
-		if (numberOnBoard() > 0) {
-			throw new TrainException("Cannot perform action with " +
-					"passengers on board - addCarriage");
+		if (newCarriage instanceof Locomotive) { // Try to shunt Locomotive
+			if (firstCarriage() instanceof Locomotive) { // First car is locomotive
+				throw new TrainException("Cannot shunt Locomotive - "+
+						"Locomotive already exists.");
+			} else if (train.isEmpty()) { // No carriages, can shunt Locomotive
+				train.addElement(newCarriage); // Push newCarriage to end of train
+			} else { // Non-Locomotive is first carriage...
+				throw new TrainException("Cannot shunt Locomotive - " +
+						"train incorrectly configured.");
+			}
+		} else if (newCarriage instanceof PassengerCar) { // Try to shunt PassengerCar
+			if (firstCarriage() instanceof Locomotive) { // First car is a locomotive
+				if (train.lastElement() instanceof FreightCar) { // FreightCar
+					throw new TrainException("Cannot shunt Passenger "+
+							"Carriage - train incorrectly configured.");
+				} else if (numberOnBoard() > 0) { // Passengers on board
+					throw new TrainException("Cannot shunt with passengers " +
+							"on board - addCarriage(PassengerCar)");
+				} else { // Has Locomotive (at front) and no Freight Carriages (at rear) or Passengers
+					train.addElement(newCarriage); // Push newCarriage to end of train
+				}
+			} else { // First Car is NOT a Locomotive
+				throw new TrainException("Cannot shunt Passenger Carriage - "+
+						"train incorrectly configured.");
+			}
+		} else if (newCarriage instanceof FreightCar) { // Try to shunt FreightCar
+			if (firstCarriage() instanceof Locomotive) { // First car is a locomotive
+				if (numberOnBoard() > 0) { // Passengers on board
+					throw new TrainException("Cannot shunt with passengers " +
+							"on board - addCarriage(FreightCar)");
+				} else { // Has Locomotive (at front) and no Passengers
+					train.addElement(newCarriage); // Push newCarriage to end of train
+				}
+			} else { // First Car is NOT a Locomotive
+				throw new TrainException("Cannot shunt Freight Carriage - "+
+						"train incorrectly configured.");
+			}
+		} else { // Invalid RollingStock type
+			throw new TrainException("Unknown Carriage type.");
 		}
+		
 	}
 	
 	/**
@@ -198,10 +231,10 @@ public class DepartingTrain extends Object {
 	 */
 	public void removeCarriage()
             throws TrainException {
-		if (numberOnBoard() > 0) {
+		if (numberOnBoard() > 0) { // Check for boarded Passengers
 			throw new TrainException("Cannot perform action with " +
 				"passengers on board - removeCarriage");
-		} else if (train.isEmpty()){
+		} else if (train.isEmpty()){ // Check for empty train
 			throw new TrainException("No Carriages to remove.");
 		} else {
 			train.remove(train.lastElement());
@@ -217,7 +250,8 @@ public class DepartingTrain extends Object {
 	 * description of the second carriage, etc, until the description
 	 * of the last carriage z. (Note that there should be no hyphen
 	 * after the last carriage.) For example, a possible train
-	 * description may be "Loco(6D)-Passenger(13/24)-Passenger(16/16)-Freight(G)".
+	 * description may be:
+	 * "Loco(6D)-Passenger(13/24)-Passenger(16/16)-Freight(G)".
 	 * 
 	 * In the degenerate case of a "train" with no carriages,
 	 * the empty string is returned.
@@ -230,14 +264,11 @@ public class DepartingTrain extends Object {
 		
 		for (int i = 0; i < train.size(); i++) { // Loop through train
 			output += train.elementAt(i).toString();
-			if (i + 1 < train.size()) { // Add break
+			if (i + 1 < train.size()) { // Add break between carriages
 				output += "-";
 			}
 		}
-
-		if (train.isEmpty()) {
-			output = "No Carriages";
-		}
+		
 		return output;
 	}
 

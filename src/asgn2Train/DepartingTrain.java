@@ -146,7 +146,7 @@ public class DepartingTrain extends Object {
 		
 		// Locomotive power VS. total train weight
 		if (train.firstElement() instanceof Locomotive) {
-			if (((Locomotive)train.firstElement()).power() > totalWeight) {
+			if (((Locomotive)train.firstElement()).power() >= totalWeight) {
 				return true;
 			} else {
 				return false;

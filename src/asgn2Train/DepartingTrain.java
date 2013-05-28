@@ -54,12 +54,12 @@ public class DepartingTrain extends Object {
 	public RollingStock nextCarriage() {
 		if (train.isEmpty()) { // Return null - no Carriages
 			return null;
-		} else if (iterator > train.size() - 1) { // Out of range - no carriage
+		} else if (iterator + 1 > train.size() - 1) { // Out of range - no carriage
 			iterator = 0; // Reset counter
 			return null; // Return null
 		} else {
 			iterator += 1;
-			return train.get(iterator);
+			return train.elementAt(iterator);
 		}
 	}
 	
@@ -135,7 +135,7 @@ public class DepartingTrain extends Object {
 	 * 
 	 * @return true if the train can move (or contains no carriages), false otherwise
 	 */
-	public boolean canMove() {
+	public boolean trainCanMove() {
 		int totalWeight = 0;
 		
 		if (train.isEmpty()) { // Return true - no Carriages

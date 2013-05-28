@@ -29,8 +29,8 @@ public class TrainGUI extends JFrame implements ActionListener {
 	private JTextArea textDisplay;
 	
 	private JLabel informationTitle;
-	// private JLabel currentLoad;
-	// private JLabel maxLoad;
+	private JLabel currentLoad;
+	private JLabel maxLoad;
 	private JLabel loadCapacity;
 	private JLabel currentPassengers;
 	private JLabel totalSeats;
@@ -77,8 +77,8 @@ public class TrainGUI extends JFrame implements ActionListener {
 		
 		/* Labels */
 		informationTitle = createLabel(INFORMATION_TITLE);
-		// currentLoad = createLabel("");
-		// maxLoad = createLabel("");
+		currentLoad = createLabel("");
+		maxLoad = createLabel("");
 		loadCapacity = createLabel("");
 		currentPassengers = createLabel("");
 		totalSeats = createLabel("");
@@ -120,8 +120,8 @@ public class TrainGUI extends JFrame implements ActionListener {
 		/* Setup West Panel */
 		westPanel.add(informationTitle);
 		informationTitle.setFont(new Font("Arial",Font.ITALIC,16));
-		// westPanel.add(currentLoad);
-		// westPanel.add(maxLoad);
+		westPanel.add(currentLoad);
+		westPanel.add(maxLoad);
 		westPanel.add(loadCapacity);
 		westPanel.add(currentPassengers);
 		westPanel.add(totalSeats);
@@ -141,7 +141,7 @@ public class TrainGUI extends JFrame implements ActionListener {
 		setJMenuBar(bar);
 		
 		repaint();
-		UpdateInformation();
+		updateInformation();
 	}
 	
 	private JPanel createPanel(Color c) {
@@ -178,22 +178,44 @@ public class TrainGUI extends JFrame implements ActionListener {
 		return newMenuItem;
 	}
 	
-	public void UpdateInformation() {
-		boolean moveable = Train.canMove();
+	private int getTotalWeight() {
+		// Loop through train in DepartingTrain
+		// Stop when null is returned
+		RollingStock tempCar = Train.firstCarriage();
+		int totalWeight = 0;
+		
+		while (tempCar != null) {
+			totalWeight += tempCar.getGrossWeight();
+			tempCar = Train.nextCarriage();
+		}
+		
+		return totalWeight;
+	}
+	
+	public void updateInformation() {
+		RollingStock tempCar = Train.firstCarriage();
+		boolean moveable = Train.trainCanMove();
 		int passengers = Train.numberOnBoard();
 		int seats = Train.numberOfSeats();
 		int freeSeats = seats - passengers;
 		
 		/* westPanel Labels */
+		if (tempCar == null) {
+			maxLoad.setText("Power: -");
+		} else {
+			maxLoad.setText("Power: " + String.valueOf(((Locomotive)tempCar).power()));
+		}
+		currentLoad.setText("Current Load: " + String.valueOf(getTotalWeight()));
+		
 		if (moveable) { // Train can move
 			loadCapacity.setText("Weight: Under Limit");
 		} else { // Train cannot move
 			loadCapacity.setText("Weight: Overloaded");
 		}
 		
-		currentPassengers.setText(" Passengers: " + String.valueOf(passengers));
-		remainingCapacity.setText(" Empty Seats: " + String.valueOf(freeSeats));
-		totalSeats.setText(" Total Seats: " + String.valueOf(seats));
+		currentPassengers.setText("Passengers: " + String.valueOf(passengers));
+		remainingCapacity.setText("Empty Seats: " + String.valueOf(freeSeats));
+		totalSeats.setText("Total Seats: " + String.valueOf(seats));
 		if (freeSeats > 0) { // Seats available
 			capacity.setText("Capacity: Not full");
 		} else { // No seats available
@@ -252,6 +274,11 @@ public class TrainGUI extends JFrame implements ActionListener {
 			} else if (source == addPassengersChoice) { // Board Passengers
 				try {
 					int overflow = Train.board(10);
+					if (overflow > 0) { // Cannot fit all passengers
+						JOptionPane.showMessageDialog(null, overflow +
+								" passengers were unable to find a seat.",
+								"No Free Seats Left", JOptionPane.INFORMATION_MESSAGE);
+					}
 				} catch (TrainException e4) {
 					errorHandler(e4);
 				}
@@ -263,7 +290,7 @@ public class TrainGUI extends JFrame implements ActionListener {
 				}
 			}
 			
-			UpdateInformation();
+			updateInformation();
 		}
 		
 		private void errorHandler(TrainException e) {

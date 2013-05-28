@@ -301,23 +301,6 @@ public class TrainTests {
 	}
 	
 	/**
-	 * Boundary case - tests that a train that has a gross weight
-	 * equal to its pulling power, returns false when trainCanMove()
-	 * is called (therefore it can't move).
-	 * 
-	 * @throws TrainException
-	 */
-	@Test
-	public void trainExactlyFull() throws TrainException {
-		int locoWeight = 200, passengerWeight = 400;
-		RollingStock loco = new Locomotive(locoWeight, LOCO_CLASS);
-		RollingStock passenger = new PassengerCar(passengerWeight, SEATS);
-		testTrain.addCarriage(loco);
-		testTrain.addCarriage(passenger);
-		assertTrue(!testTrain.trainCanMove());
-	}
-	
-	/**
 	 * Boundary case(?) - tests that a grossWeight of a train that 
 	 * exceeds the pulling power if the locomotive returns true when trainCanMove()
 	 * returns false.

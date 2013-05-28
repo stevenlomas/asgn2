@@ -18,18 +18,16 @@ import asgn2Exceptions.TrainException;
  */
 public class RollingStockTests {
 	
-	private Vector<RollingStock> testRollingStock;
+	private Vector<RollingStock> testRollingStock = new Vector<RollingStock>();
 	public static final int ZERO = 0;
 	public static final int LOCO_WEIGHT = 90;
 	public static final int PASSENGER_WEIGHT = 50;
 	public static final int FREIGHT_WEIGHT = 40;
 	public static final String LOCO_CLASS = "5E";
-	public static final String LOCO_POWER = "5";
 	public static final int PASSENGER_SEATS = 5;
 	public static final String FREIGHT_TYPE = "G";
 	
 	//public static final String LOCO_CLASS = "1E";
-	
 	//public static final String INVALID_LOCO_POWER = "0E";
 	//public static final String INVALID_LOCO_TYPE = "1F";
 	
@@ -91,25 +89,45 @@ public class RollingStockTests {
 	@Test (expected = TrainException.class)
 	public void invalidNumberAlightingNegative() throws TrainException {
 		int numAlighting = -1, passengers = 5;
-		testRollingStock.addElement(new Locomotive(90, "1E"));
+		testRollingStock.addElement(new Locomotive(LOCO_WEIGHT, LOCO_CLASS));
 		testRollingStock.addElement(new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS));
 		((PassengerCar)testRollingStock.elementAt(1)).board(passengers);
 		((PassengerCar)testRollingStock.elementAt(1)).alight(numAlighting);
 	}
 	
-	@Test
-	public void invalidNumberAlightingTooFewPassengers() throws TrainException {
-		//test
+	@Test (expected = TrainException.class)
+	public void invalidNumberAlightingTooMany() throws TrainException {
+		int numAlighting = 6, passengers = 5;
+		testRollingStock.addElement(new Locomotive(LOCO_WEIGHT, LOCO_CLASS));
+		testRollingStock.addElement(new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS));
+		((PassengerCar)testRollingStock.elementAt(1)).board(passengers);
+		((PassengerCar)testRollingStock.elementAt(1)).alight(numAlighting);
 	}
 	
-	@Test
+	/**
+	 * Exceptional case - tests for a negative number of passengers 
+	 * attempting to board the carriage
+	 * 
+	 * @throws TrainException
+	 */
+	@Test (expected = TrainException.class)
 	public void invalidNumberBoarding() throws TrainException {
-		//test
+		int passengers = -1;
+		testRollingStock.addElement(new Locomotive(LOCO_WEIGHT, LOCO_CLASS));
+		testRollingStock.addElement(new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS));
+		((PassengerCar)testRollingStock.elementAt(1)).board(passengers);
 	}
 	
-	@Test
+	/**
+	 * Exceptional case - tests for a negative number of seats that have
+	 * been assigned in the carriage
+	 * 
+	 * @throws TrainException
+	 */
+	@Test (expected = TrainException.class)
 	public void invalidNumberOfSeats() throws TrainException {
-		//test
+		int numSeats = -1;
+		testRollingStock.addElement(new PassengerCar(PASSENGER_WEIGHT, numSeats));
 	}
 	
 	@Test

@@ -7,7 +7,7 @@ import asgn2Exceptions.TrainException;
  * @author Steven Lomas
  */
 public class Locomotive extends RollingStock {
-	
+	boolean powerTooLow = false;
 	private Integer locoPower;
 	private String locoClass;
 	//private char locoEngineType;
@@ -36,7 +36,11 @@ public class Locomotive extends RollingStock {
 		locoClassChar = locoClass.toCharArray();
 		char engineType = locoClassChar[1];
 		locoPower = (Integer.parseInt(String.valueOf(locoClassChar[0])) * 100);
-
+		
+		if (this.power() < 0) {
+			powerTooLow = true;
+		}
+		
 		/* More exception tests below */
 		//there should only be 2 characters in the classification string
 		if (locoClassChar.length != 2) {

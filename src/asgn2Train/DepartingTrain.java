@@ -16,7 +16,7 @@ public class DepartingTrain extends Object {
 	/**
 	 * Constructs a (potential) train object containing no carriages (yet)
 	 */
-	DepartingTrain() {
+	public DepartingTrain() {
 		iterator = 0;
 		
 		// OLD - this.nextCar = new PassengerCar(50, 24);
@@ -28,7 +28,6 @@ public class DepartingTrain extends Object {
 	 * Special value null is returned if there are no carriages on the train at all.
 	 * 
 	 * @return the first carriage in the train, or null if there are no carriages
-	 * @throws TrainException
 	 */
 	public RollingStock firstCarriage() {
 		if (train.isEmpty()) {
@@ -51,7 +50,6 @@ public class DepartingTrain extends Object {
 	 * @return the train's next carriage after the one returned by the immediately
 	 * preceding call to either firstCarriage or nextCarriage, or null if there
 	 * is no such carriage
-	 * @throws TrainException
 	 */
 	public RollingStock nextCarriage() {
 		if (train.isEmpty()) { // Return null - no Carriages

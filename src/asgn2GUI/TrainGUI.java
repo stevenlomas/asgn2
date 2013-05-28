@@ -17,6 +17,7 @@ public class TrainGUI extends JFrame implements ActionListener {
 	
 	private static final long serialVersionUID = -7031008862559936404L;
 	private static final String TITLE = "Departing Train - INB370 asgn2";
+	private static final String INFORMATION_TITLE = "Train information:";
 	
 	private DepartingTrain Train = new DepartingTrain();
 	
@@ -28,6 +29,7 @@ public class TrainGUI extends JFrame implements ActionListener {
 	
 	private JTextArea textDisplay;
 	
+	private JLabel informationTitle;
 	private JLabel currentLoad;
 	private JLabel currentPassengers;
 	private JLabel totalSeats;
@@ -40,11 +42,11 @@ public class TrainGUI extends JFrame implements ActionListener {
 	private JMenuItem addPassengersChoice;
 	
 	// Remove Menu
-	private JMenuItem removeLocomotiveChoice;
+	private JMenuItem removeCarriageChoice;
 	private JMenuItem removePassengersChoice;
 	
-	public static final int WIDTH = 640;
-	public static final int HEIGHT = 480;
+	public static final int WIDTH = 720;
+	public static final int HEIGHT = 240;
 	
 
 	/**
@@ -66,12 +68,13 @@ public class TrainGUI extends JFrame implements ActionListener {
 		northPanel = createPanel(Color.LIGHT_GRAY);
 		southPanel = createPanel(Color.LIGHT_GRAY);
 		eastPanel = createPanel(Color.LIGHT_GRAY);
-		westPanel = createPanel(Color.LIGHT_GRAY);
 		
+		westPanel = createPanel(Color.LIGHT_GRAY);
 		westPanel.setLayout(new BoxLayout(westPanel, BoxLayout.Y_AXIS));
-		westPanel.setSize(WIDTH - 500, HEIGHT - 50);
+		westPanel.setPreferredSize(new Dimension(150, 100));
 		
 		/* Labels */
+		informationTitle = createLabel(INFORMATION_TITLE);
 		currentLoad = createLabel("");
 		currentPassengers = createLabel("");
 		totalSeats = createLabel("");
@@ -79,41 +82,24 @@ public class TrainGUI extends JFrame implements ActionListener {
 		
 		/* Add Menu */
 		JMenu addMenu = new JMenu("Add");
-		
-		addLocomotiveChoice = new JMenuItem("Locomotive");
-		addLocomotiveChoice.addActionListener(new MenuListener());
-		addMenu.add(addLocomotiveChoice);
-		
-		addPassengerCarChoice = new JMenuItem("Passenger Carriage");
-		addPassengerCarChoice.addActionListener(new MenuListener());
-		addMenu.add(addPassengerCarChoice);
-		
-		addFreightCarChoice = new JMenuItem("Freight Carriage");
-		addFreightCarChoice.addActionListener(new MenuListener());
-		addMenu.add(addFreightCarChoice);
-		
-		addPassengersChoice = new JMenuItem("Passengers");
-		addPassengersChoice.addActionListener(new MenuListener());
-		addMenu.add(addPassengersChoice);
+		addMenu.setToolTipText("Add Carriages or Passengers to this train.");
 		
 		/* Remove Menu */
 		JMenu removeMenu = new JMenu("Remove");
+		removeMenu.setToolTipText("Remove Carriages from this train.");
 		
-		removeLocomotiveChoice = new JMenuItem("Carriage");
-		removeLocomotiveChoice.addActionListener(new MenuListener());
-		removeMenu.add(removeLocomotiveChoice);
-		
-		removePassengersChoice = new JMenuItem("Passengers");
-		removePassengersChoice.addActionListener(new MenuListener());
-		removeMenu.add(removePassengersChoice);
+		/* Menu Items */
+		addLocomotiveChoice = createMenuItem("Locomotive");
+		addPassengerCarChoice = createMenuItem("Passenger Carriage");
+		addFreightCarChoice = createMenuItem("Freight Carriage");
+		addPassengersChoice = createMenuItem("Passengers");
+		removeCarriageChoice = createMenuItem("Carriage");
 		
 		/* Text Area */
 		textDisplay = new JTextArea();
 		textDisplay.setEditable(false);
 		textDisplay.setLineWrap(true);
 		textDisplay.setFont(new Font("Arial",Font.BOLD,24));
-		textDisplay.setBorder(BorderFactory.createEtchedBorder());
-		// textDisplay.setSize(100, 200);
 		
 		/* Setup Panels */
 		this.getContentPane().add(centerPanel,BorderLayout.CENTER);
@@ -124,11 +110,20 @@ public class TrainGUI extends JFrame implements ActionListener {
 		
 		centerPanel.add(textDisplay);
 		
-		/* West Panel */
+		/* Setup West Panel */
+		westPanel.add(informationTitle);
+		informationTitle.setFont(new Font("Arial",Font.ITALIC,16));
 		westPanel.add(currentLoad);
 		westPanel.add(currentPassengers);
 		westPanel.add(totalSeats);
 		westPanel.add(capacity);
+		
+		/* Setup Menus */
+		addMenu.add(addLocomotiveChoice);
+		addMenu.add(addPassengerCarChoice);
+		addMenu.add(addFreightCarChoice);
+		addMenu.add(addPassengersChoice);
+		removeMenu.add(removeCarriageChoice);
 		
 		JMenuBar bar = new JMenuBar();
 		bar.add(addMenu);
@@ -136,13 +131,14 @@ public class TrainGUI extends JFrame implements ActionListener {
 		setJMenuBar(bar);
 		
 		repaint();
+		UpdateInformation();
 	}
 	
 	private JPanel createPanel(Color c) {
-		// Create a JPanel object and store it in a local var
+		// Create a JPanel object
 		JPanel newPanel = new JPanel();
 		
-		// Set the background colour to that passed in c
+		// Set the background colour
 		newPanel.setBackground(c);
 		
 		// Return the JPanel object
@@ -150,14 +146,26 @@ public class TrainGUI extends JFrame implements ActionListener {
 	}
 	
 	private JLabel createLabel(String text) {
-		// Create a JLabel object and store it in a local var
+		// Create a JLabel object
 		JLabel newLabel = new JLabel();
 		
 		// Set the text
 		newLabel.setText(text);
+		newLabel.setAlignmentX(CENTER_ALIGNMENT);
 		
 		// Return the JLabel object
 		return newLabel;
+	}
+	
+	private JMenuItem createMenuItem(String name) {
+		// Create a JMenuItem object
+		JMenuItem newMenuItem = new JMenuItem(name);
+		
+		// Add the Action Listener to catch events
+		newMenuItem.addActionListener(new MenuListener());
+		
+		// Return the JMenuItem object
+		return newMenuItem;
 	}
 	
 	public void UpdateInformation() {
@@ -166,20 +174,22 @@ public class TrainGUI extends JFrame implements ActionListener {
 		int seats = Train.numberOfSeats();
 		int freeSeats = seats - passengers;
 		
+		/* westPanel Labels */
 		if (moveable) { // Train can move
-			currentLoad.setText("Underloaded");
+			currentLoad.setText(" Weight: Under Limit");
 		} else { // Train cannot move
-			currentLoad.setText("Overloaded");
+			currentLoad.setText(" Weight: Overloaded");
 		}
-		
 		if (freeSeats > 0) { // Seats available
-			capacity.setText("Train is not full");
+			capacity.setText(" Capacity: Not full");
 		} else {
-			capacity.setText("Train is full");
+			capacity.setText(" Capacity: Full");
 		}
+		currentPassengers.setText(" Passengers: " + String.valueOf(passengers));
+		totalSeats.setText(" Seats: " + String.valueOf(seats));
 		
-		currentPassengers.setText(String.valueOf(passengers));
-		totalSeats.setText(String.valueOf(seats));
+		/* centerPanel text */
+		textDisplay.setText("Train: " + Train.toString());
 	}
 	
 	/* (non-Javadoc)
@@ -207,16 +217,20 @@ public class TrainGUI extends JFrame implements ActionListener {
 	private class MenuListener implements ActionListener {
 		
 		public void actionPerformed(ActionEvent e) {
-           Component source = (Component) e.getSource();
-           if (source == removeLocomotiveChoice) { // Remove Locomotive
-        	   try {
-				Train.removeCarriage();
+			Component source = (Component)e.getSource();
+			if (source == addLocomotiveChoice) {
+				//
+			} else if (source == removeCarriageChoice) { // Remove Locomotive
+				try {
+					Train.removeCarriage();
 				} catch (TrainException e1) {
 					errorHandler(e1);
 				}
-           }
-           
-           UpdateInformation();
+			} else if (source == removePassengersChoice) { // Remove passengers
+				// Does nothing yet
+			}
+			
+			UpdateInformation();
 		}
 		
 		private void errorHandler(TrainException e) {

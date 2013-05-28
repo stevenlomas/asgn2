@@ -23,8 +23,9 @@ public class RollingStockTests {
 	public static final int LOCO_WEIGHT = 90;
 	public static final int PASSENGER_WEIGHT = 50;
 	public static final int FREIGHT_WEIGHT = 40;
-	public static final String LOCO_CLASS = "1E";
-	public static final int PASSENGER_SEATS = 1;
+	public static final String LOCO_CLASS = "5E";
+	public static final String LOCO_POWER = "5";
+	public static final int PASSENGER_SEATS = 5;
 	public static final String FREIGHT_TYPE = "G";
 	
 	//public static final String LOCO_CLASS = "1E";
@@ -87,8 +88,17 @@ public class RollingStockTests {
 		testRollingStock.addElement(new Locomotive(LOCO_WEIGHT, invalidType));
 	}
 	
+	@Test (expected = TrainException.class)
+	public void invalidNumberAlightingNegative() throws TrainException {
+		int numAlighting = -1, passengers = 5;
+		testRollingStock.addElement(new Locomotive(90, "1E"));
+		testRollingStock.addElement(new PassengerCar(PASSENGER_WEIGHT, PASSENGER_SEATS));
+		((PassengerCar)testRollingStock.elementAt(1)).board(passengers);
+		((PassengerCar)testRollingStock.elementAt(1)).alight(numAlighting);
+	}
+	
 	@Test
-	public void invalidNumberAlighting() throws TrainException {
+	public void invalidNumberAlightingTooFewPassengers() throws TrainException {
 		//test
 	}
 	

@@ -104,16 +104,6 @@ public class TrainTests {
 		testTrain.addCarriage(freight);
 	}
 	
-	/*@Test
-	public void noPassengersIntitially() {
-		//test
-	}
-	
-	@Test
-	public void noSeatsInitially() {
-		//test
-	}*/
-	
 	/**
 	 * Exceptional case - tests that adding another cart after passengers
 	 * have boarded the train throws an exception.
@@ -130,19 +120,6 @@ public class TrainTests {
 		testTrain.board(numPassengers);
 		testTrain.addCarriage(passenger);
 	}
-	
-	/*@Test
-	public void nullTrainCanMove() throws TrainException {
-		RollingStock loco = new Locomotive(null, LOCO_CLASS);
-		RollingStock passenger = new PassengerCar(PASSENGER_WEIGHT, SEATS);
-		testTrain.addCarriage(loco);
-		testTrain.addCarriage(passenger);
-	}
-	
-	@Test
-	public void nullTrainPrintsCorrectly() {
-		//test
-	}*/
 	
 	/**
 	 * Normal case - tests that the number of seats are correctly
@@ -314,7 +291,6 @@ public class TrainTests {
 		RollingStock passenger = new PassengerCar(PASSENGER_WEIGHT, SEATS);
 		testTrain.addCarriage(loco);
 		testTrain.addCarriage(passenger);
-		testTrain.addCarriage(loco);
-		
+		testTrain.addCarriage(loco);	
 	}
 }

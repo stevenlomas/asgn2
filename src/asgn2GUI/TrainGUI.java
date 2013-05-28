@@ -2,6 +2,7 @@ package asgn2GUI;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Scanner;
 
 import javax.swing.*;
 
@@ -278,14 +279,26 @@ public class TrainGUI extends JFrame implements ActionListener {
 		}
 		
 		private void addLocomotive() {
+			boolean valid = false;
+			String input = "";
 			int weight = 90;
 			Object[] enginePower = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 			Object[] engineType = { "Diesel", "Steam", "Eletric" };
 			
-			/* String engine = (String)JOptionPane.showInputDialog(null,
-					"Choose the type of engine.", "Engine Type",
-					JOptionPane.INFORMATION_MESSAGE, null,
-					engineType, engineType[0]); */
+			do {
+				input = (String)JOptionPane.showInputDialog(null,
+						"Specify Carriage Weight (tonnes)\n " +
+						"Between 90 and 300", "Carriage Weight",
+						JOptionPane.INFORMATION_MESSAGE, null, null, 90);
+				try { 
+			        weight = Integer.parseInt(input);
+			        if (weight >= 90 && weight <= 300) {
+			        	valid = true;
+			        }
+			    } catch(NumberFormatException e) { 
+			        valid = false;
+			    }
+			} while (!valid);
 			
 			String power = (String)JOptionPane.showInputDialog(null,
 					"Choose the engine power.", "Engine Power",
@@ -314,18 +327,40 @@ public class TrainGUI extends JFrame implements ActionListener {
 		}
 		
 		private void addPassengerCarriage() {
+			boolean valid = false;
+			String input = "";
 			int weight = 50;
 			int seats = 50;
 			
-			/* weight = (Int)JOptionPane.showInputDialog(null,
-					"Choose the type of engine.", "Engine Type",
-					JOptionPane.INFORMATION_MESSAGE, null,
-					engineType, engineType[0]); */
+			do {
+				input = (String)JOptionPane.showInputDialog(null,
+						"Specify Carriage Weight (tonnes)\n " +
+						"Between 50 and 200", "Carriage Weight",
+						JOptionPane.INFORMATION_MESSAGE, null, null, 50);
+				try { 
+			        weight = Integer.parseInt(input);
+			        if (weight >= 50 && weight <= 200) {
+			        	valid = true;
+			        }
+			    } catch(NumberFormatException e) { 
+			        valid = false;
+			    }
+			} while (!valid);
 			
-			/* seats = (Int)JOptionPane.showInputDialog(null,
-			"Choose the type of engine.", "Engine Type",
-			JOptionPane.INFORMATION_MESSAGE, null,
-			engineType, engineType[0]); */
+			do {
+				input = (String)JOptionPane.showInputDialog(null,
+						"Specify number of seats in carriage\n " +
+						"Between 0 and 200", "Carriage Seats",
+						JOptionPane.INFORMATION_MESSAGE, null, null, 0);
+				try { 
+			        seats = Integer.parseInt(input);
+			        if (seats >= 40 && seats <= 200) {
+			        	valid = true;
+			        }
+			    } catch(NumberFormatException e) { 
+			        valid = false;
+			    }
+			} while (!valid);
 			
 			try {
 				Train.addCarriage(new PassengerCar(weight, seats));
@@ -335,14 +370,26 @@ public class TrainGUI extends JFrame implements ActionListener {
 		}
 		
 		private void addFreight() {
+			boolean valid = false;
+			String input = "";
 			int weight = 40;
 			Object[] goodsType = { "General Goods", "Refrigerated Goods",
 					"Dangerous Materials" };
 			
-			/* weight = (String)JOptionPane.showInputDialog(null,
-					"Choose the type of engine.", "Engine Type",
-					JOptionPane.INFORMATION_MESSAGE, null,
-					engineType, engineType[0]); */
+			do {
+				input = (String)JOptionPane.showInputDialog(null,
+						"Specify Carriage Weight (tonnes)\n " +
+						"Between 40 and 200", "Carriage Weight",
+						JOptionPane.INFORMATION_MESSAGE, null, null, 40);
+				try { 
+			        weight = Integer.parseInt(input);
+			        if (weight >= 40 && weight <= 200) {
+			        	valid = true;
+			        }
+			    } catch(NumberFormatException e) { 
+			        valid = false;
+			    }
+			} while (!valid);
 			
 			String goods = (String)JOptionPane.showInputDialog(null,
 					"Choose the type of goods this\n Freight Carriage will carry.",
@@ -366,13 +413,25 @@ public class TrainGUI extends JFrame implements ActionListener {
 		}
 		
 		private int addPassengers() {
-			int passengers = 10;
+			boolean valid = false;
+			String input = "";
+			int passengers = 0;
 			int overflow = 0;
 						
-			/* String engine = (String)JOptionPane.showInputDialog(null,
-					"Choose the type of engine.", "Engine Type",
-					JOptionPane.INFORMATION_MESSAGE, null,
-					engineType, engineType[0]); */
+			do {
+				input = (String)JOptionPane.showInputDialog(null,
+						"Specify number of passengers to board\n " +
+						"Between 0 and 1000", "Carriage Weight",
+						JOptionPane.INFORMATION_MESSAGE, null, null, 0);
+				try { 
+					passengers = Integer.parseInt(input);
+			        if (passengers >= 0 && passengers <= 1000) {
+			        	valid = true;
+			        }
+			    } catch(NumberFormatException e) { 
+			        valid = false;
+			    }
+			} while (!valid);
 			
 			try {
 				overflow = Train.board(passengers);

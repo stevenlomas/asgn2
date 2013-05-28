@@ -1,5 +1,7 @@
 package asgn2Tests;
 
+import java.util.Vector;
+
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -7,6 +9,7 @@ import asgn2RollingStock.RollingStock;
 import asgn2RollingStock.Locomotive;
 import asgn2RollingStock.FreightCar;
 import asgn2RollingStock.PassengerCar;
+import asgn2Exceptions.TrainException;
 
 /**
  * 
@@ -15,7 +18,7 @@ import asgn2RollingStock.PassengerCar;
  */
 public class RollingStockTests {
 	
-	private RollingStock testRollingStock;
+	private Vector<RollingStock> testRollingStock;
 	
 	/* 
 	 * may not need this, depends on the implementation
@@ -25,9 +28,10 @@ public class RollingStockTests {
 		testRollingStock = new RollingStock(0);
 	}*/
 	
-	@Test
-	public void invalidGrossWeightDisallowed() {
-		//test
+	@Test (expected = TrainException.class)
+	public void invalidGrossWeight() throws TrainException {
+		int maxInvalidWeight = 89;
+		testRollingStock.addElement(new Locomotive(maxInvalidWeight, "1E"));
 	}
 	
 	@Test

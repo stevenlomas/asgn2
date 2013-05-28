@@ -21,7 +21,7 @@ public class TrainException extends Exception {
 	 * cause of the problem
 	 */
 	public TrainException(String message) {
-		super(message);
+		super("Train Exception: " + message);
 	}
 	
 }

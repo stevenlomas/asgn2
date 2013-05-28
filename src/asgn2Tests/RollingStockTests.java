@@ -143,7 +143,7 @@ public class RollingStockTests {
 		int locoWeight = 250;
 		String locoClass = "2D";
 		testRollingStock = new Locomotive(locoWeight, locoClass);	
-	}/*
+	}*/
 	
 	/**
 	 * Normal case - tests that the toString() method in the locomotive
@@ -333,4 +333,3 @@ public class RollingStockTests {
 		assertEquals(actualClass, "Loco(5D)");
 	}
 }
-

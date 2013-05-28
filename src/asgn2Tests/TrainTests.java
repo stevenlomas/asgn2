@@ -1,14 +1,12 @@
 package asgn2Tests;
 
+import java.util.Vector;
+
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.Before;
 import asgn2Train.DepartingTrain;
-import asgn2RollingStock.RollingStock;
-import asgn2RollingStock.Locomotive;
-import asgn2RollingStock.FreightCar;
-import asgn2RollingStock.PassengerCar;
-
+import asgn2RollingStock.*;
+import asgn2Exceptions.TrainException;
 /**
  * 
  * @author Grant O'Meara
@@ -16,19 +14,26 @@ import asgn2RollingStock.PassengerCar;
  */
 public class TrainTests {
 	
+	private Vector<RollingStock> train = new Vector<RollingStock>();
 	private DepartingTrain testTrain;
 	
-	/* 
-	 * may not need this, depends on the implementation
-	 */
-	/*@Before
-	public void setUp() {
-		testTrain = new DepartingTrain();
-	}*/
-	
 	@Test
-	public void assembleValidTrain() {
-		//test
+	public void assembleValidTrain() throws TrainException {
+		RollingStock loco = new Locomotive(90, "5D");
+		RollingStock passenger = new	PassengerCar(50, 10);
+		RollingStock freight = new FreightCar(40, "G");
+		
+		testTrain.addCarriage(loco);
+		
+		/*train.addElement(loco);
+		train.addElement(passenger);
+		train.addElement(freight);*/
+		
+		
+		
+		/*testTrain.addCarriage(loco);
+		testTrain.addCarriage(passenger);
+		testTrain.addCarriage(freight);*/	
 	}
 	
 	@Test
@@ -51,20 +56,6 @@ public class TrainTests {
 		//test
 	}
 	
-	@Test
-	public void noExtraPublicDepartingTrainConstructor() {
-		//test
-	}
-	
-	@Test
-	public void noExtraPublicDepartingTrainFields() {
-		//test
-	}
-	
-	@Test
-	public void noExtrapublicDepartingTrainMethods() {
-		//test
-	}
 	
 	@Test
 	public void noLocomotiveFirst() {

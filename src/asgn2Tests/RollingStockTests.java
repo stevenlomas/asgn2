@@ -2,10 +2,7 @@ package asgn2Tests;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
-import asgn2RollingStock.RollingStock;
-import asgn2RollingStock.Locomotive;
-import asgn2RollingStock.FreightCar;
-import asgn2RollingStock.PassengerCar;
+import asgn2RollingStock.*;
 import asgn2Exceptions.TrainException;
 
 /**

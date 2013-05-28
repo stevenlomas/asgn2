@@ -11,7 +11,6 @@ import asgn2Exceptions.TrainException;
 
 /**
  * @author Steven Lomas
- *
  */
 public class TrainGUI extends JFrame implements ActionListener {
 	
@@ -149,7 +148,7 @@ public class TrainGUI extends JFrame implements ActionListener {
 		// Create a JPanel object
 		JPanel newPanel = new JPanel();
 		
-		// Set the background colour
+		// Set the background color
 		newPanel.setBackground(c);
 		
 		// Return the JPanel object
@@ -234,7 +233,7 @@ public class TrainGUI extends JFrame implements ActionListener {
 			
 			if (source == addLocomotiveChoice) { // Add Locomotive
 				try {
-					Train.addCarriage(new Locomotive(90, "1D"));
+					Train.addCarriage(new Locomotive(90, "5S"));
 				} catch (TrainException e1) {
 					errorHandler(e1);
 				}

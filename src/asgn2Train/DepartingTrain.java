@@ -54,8 +54,9 @@ public class DepartingTrain extends Object {
 	public RollingStock nextCarriage() {
 		if (train.isEmpty()) { // Return null - no Carriages
 			return null;
-		} else if (iterator > train.size() - 1) { // Out of range?
-			return null;
+		} else if (iterator > train.size() - 1) { // Out of range - no carriage
+			iterator = 0; // Reset counter
+			return null; // Return null
 		} else {
 			iterator += 1;
 			return train.get(iterator);

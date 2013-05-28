@@ -20,6 +20,10 @@ public class FreightCar extends RollingStock {
      throws TrainException {
 		super(grossWeight); // Implicit super constructor
 		
+		if (grossWeight < 40) {
+			throw new TrainException("Min weight of Freight car is 40t");
+		}
+		
 		if (goodsType != "G" &&
 			goodsType != "R" &&
 			goodsType != "D") {

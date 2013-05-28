@@ -25,19 +25,19 @@ public class Locomotive extends RollingStock {
 	public Locomotive(Integer grossWeight, String classification)
      throws TrainException {
 		super(grossWeight);
+		
+		//90 tonnes was chosen as it was mentioned to be the average min 
+		//weight of a locomotive in the assignment spec
+		if (grossWeight < 90) {
+			throw new TrainException("Min weight of Locomotive is 90t");
+		}
 
 		locoClass = classification;
 		locoClassChar = locoClass.toCharArray();
 		char engineType = locoClassChar[1];
 		locoPower = (Integer.parseInt(String.valueOf(locoClassChar[0])) * 100);
 
-		/* Exception tests below */
-		//90 tonnes was chosen as it was mentioned to be the average min 
-		//weight of a locomotive in the assignment spec
-		if (grossWeight < 90) {
-			throw new TrainException("Locomotive may not have a gross " +
-					"weight that is less than 90 tonnes.");
-		}
+		/* More exception tests below */
 		//there should only be 2 characters in the classification string
 		if (locoClassChar.length != 2) {
 			throw new TrainException("Invalid classification. Locomotive must have letter " +

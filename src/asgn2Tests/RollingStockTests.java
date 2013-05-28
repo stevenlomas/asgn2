@@ -21,7 +21,11 @@ public class RollingStockTests {
 	private Vector<RollingStock> testRollingStock;
 	public static final int ZERO = 0;
 	public static final int LOCO_WEIGHT = 90;
+	public static final int PASSENGER_WEIGHT = 50;
+	public static final int FREIGHT_WEIGHT = 40;
 	public static final String LOCO_CLASS = "1E";
+	//public static final String LOCO_CLASS = "1E";
+	
 	//public static final String INVALID_LOCO_POWER = "0E";
 	//public static final String INVALID_LOCO_TYPE = "1F";
 	
@@ -33,10 +37,18 @@ public class RollingStockTests {
 		testRollingStock = new RollingStock(0);
 	}*/
 	
+	/**
+	 * A constant of value zero is used to test that an invalid gross
+	 * weight throws an exception, as zero is not a valid weight
+	 * 
+	 * @throws TrainException
+	 */
 	@Test (expected = TrainException.class)
 	public void invalidGrossWeight() throws TrainException {
 		testRollingStock.addElement(new Locomotive(ZERO, LOCO_CLASS));
-		testRollingStock.addElement(new Locomotive(ZERO, LOCO_CLASS));
+		testRollingStock.addElement(new PassengerCar(ZERO, ZERO));
+		testRollingStock.addElement(new FreightCar(ZERO, "Goods"));
+		
 	}
 	
 	@Test (expected = TrainException.class)

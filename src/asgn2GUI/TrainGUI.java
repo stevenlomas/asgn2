@@ -333,7 +333,7 @@ public class TrainGUI extends JFrame implements ActionListener {
 			
 			do {
 				input = (String)JOptionPane.showInputDialog(null,
-						"Specify Carriage Weight (tonnes)\n " +
+						"Specify Carriage Weight (tonnes)\n" +
 						"Between 50 and 200", "Carriage Weight",
 						JOptionPane.INFORMATION_MESSAGE, null, null, 50);
 				try { 
@@ -346,14 +346,16 @@ public class TrainGUI extends JFrame implements ActionListener {
 			    }
 			} while (!valid);
 			
+			valid = false;
+			
 			do {
 				input = (String)JOptionPane.showInputDialog(null,
-						"Specify number of seats in carriage\n " +
+						"Specify number of seats in carriage\n" +
 						"Between 0 and 200", "Carriage Seats",
 						JOptionPane.INFORMATION_MESSAGE, null, null, 0);
 				try { 
 			        seats = Integer.parseInt(input);
-			        if (seats >= 40 && seats <= 200) {
+			        if (seats >= 0 && seats <= 200) {
 			        	valid = true;
 			        }
 			    } catch(NumberFormatException e) { 
@@ -377,7 +379,7 @@ public class TrainGUI extends JFrame implements ActionListener {
 			
 			do {
 				input = (String)JOptionPane.showInputDialog(null,
-						"Specify Carriage Weight (tonnes)\n " +
+						"Specify Carriage Weight (tonnes)\n" +
 						"Between 40 and 200", "Carriage Weight",
 						JOptionPane.INFORMATION_MESSAGE, null, null, 40);
 				try { 
@@ -391,8 +393,9 @@ public class TrainGUI extends JFrame implements ActionListener {
 			} while (!valid);
 			
 			String goods = (String)JOptionPane.showInputDialog(null,
-					"Choose the type of goods this\n Freight Carriage will carry.",
-					"Goods Type", JOptionPane.INFORMATION_MESSAGE, null,
+					"Choose the type of goods this\n" +
+					"Freight Carriage will carry.",	"Goods Type",
+					JOptionPane.INFORMATION_MESSAGE, null,
 					goodsType, goodsType[0]);
 			
 			switch (goods) {
@@ -419,7 +422,7 @@ public class TrainGUI extends JFrame implements ActionListener {
 						
 			do {
 				input = (String)JOptionPane.showInputDialog(null,
-						"Specify number of passengers to board\n " +
+						"Specify number of passengers to board\n" +
 						"Between 0 and 1000", "Carriage Weight",
 						JOptionPane.INFORMATION_MESSAGE, null, null, 0);
 				try { 

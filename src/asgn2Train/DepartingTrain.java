@@ -10,13 +10,14 @@ import java.util.Vector;
 
 public class DepartingTrain extends Object {
 	
-	private Vector<RollingStock> train = new Vector<RollingStock>();
+	private Vector<RollingStock> train;
 	private int iterator;
 
 	/**
 	 * Constructs a (potential) train object containing no carriages (yet)
 	 */
 	public DepartingTrain() {
+		train = new Vector<RollingStock>();
 		iterator = 0;
 	}
 
